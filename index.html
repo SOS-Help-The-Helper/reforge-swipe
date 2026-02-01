@@ -165,18 +165,23 @@
             padding: 20px;
         }
         
-        /* Top row: Score + LinkedIn */
+        /* Top row: Name + LinkedIn */
         .card-top {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .card-top .prospect-name {
+            margin-bottom: 0;
         }
         
         .lead-score {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-top: 16px;
         }
         
         .score-badge {
@@ -807,21 +812,21 @@ function showCard() {
         <div class="swipe-indicator qualify">Qualify</div>
         <div class="card-inner">
             <div class="card-top">
-                <div class="lead-score">
-                    <div class="score-badge score-${score.grade.toLowerCase()}">${score.grade}</div>
-                    <div>
-                        <div class="score-label">LEAD SCORE</div>
-                        <div class="score-reason">${score.reason}</div>
-                    </div>
-                </div>
+                <div class="prospect-name">${p.name}</div>
                 <button class="linkedin-btn" onclick="openLI()">in</button>
             </div>
-            <div class="prospect-name">${p.name}</div>
             <div class="prospect-title">${p.title}</div>
             <div class="company-block">
                 <div class="company-name">${p.company}</div>
                 <div class="company-blurb">${p.companyBlurb}</div>
                 <div class="company-location">📍 ${p.location}</div>
+            </div>
+            <div class="lead-score">
+                <div class="score-badge score-${score.grade.toLowerCase()}">${score.grade}</div>
+                <div>
+                    <div class="score-label">LEAD SCORE</div>
+                    <div class="score-reason">${score.reason}</div>
+                </div>
             </div>
             <div class="signals">${signalsHtml}</div>
         </div>
