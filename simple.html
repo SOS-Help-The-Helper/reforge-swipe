@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reforge Lead Qualifier</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, sans-serif; background: #1a1a2e; min-height: 100vh; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        h1 { font-size: 2rem; margin-bottom: 20px; color: #667eea; }
+        .stats { display: flex; gap: 30px; margin-bottom: 20px; }
+        .qualified { color: #4ade80; }
+        .rejected { color: #f87171; }
+        .remaining { color: #94a3b8; }
+        .card { width: 400px; background: #1e293b; border-radius: 20px; padding: 30px; margin-bottom: 20px; }
+        .name { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .title { color: #a78bfa; margin-bottom: 15px; }
+        .info { margin-bottom: 10px; color: #94a3b8; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-top: 10px; }
+        .hot { background: rgba(239,68,68,0.2); color: #fca5a5; }
+        .network { background: rgba(59,130,246,0.2); color: #93c5fd; }
+        .controls { display: flex; gap: 20px; margin-bottom: 20px; }
+        .btn { width: 70px; height: 70px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.8rem; }
+        .btn-reject { background: #ef4444; }
+        .btn-qualify { background: #22c55e; }
+        .btn-linkedin { width: 50px; height: 50px; background: #0077b5; font-size: 1rem; color: white; }
+        .done { text-align: center; padding: 50px; }
+        .export { margin-top: 20px; }
+        .export button { padding: 10px 20px; margin: 5px; border: none; border-radius: 8px; cursor: pointer; }
+        .exp-qual { background: #22c55e; color: white; }
+        .exp-rej { background: #64748b; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🎯 Reforge Lead Qualifier</h1>
+    <div class="stats">
+        <span class="qualified">✓ <span id="qc">0</span> Qualified</span>
+        <span class="rejected">✗ <span id="rc">0</span> Rejected</span>
+        <span class="remaining">📋 <span id="rm">0</span> Remaining</span>
+    </div>
+    <div id="card"></div>
+    <div class="controls">
+        <button class="btn btn-reject" onclick="swipe('reject')">✗</button>
+        <button class="btn btn-linkedin" onclick="openLI()">in</button>
+        <button class="btn btn-qualify" onclick="swipe('qualify')">✓</button>
+    </div>
+    <div>← or J = Reject | → or K = Qualify | L = LinkedIn | U = Undo</div>
+    <div class="export">
+        <button class="exp-qual" onclick="exp('qualified')">📥 Export Qualified</button>
+        <button class="exp-rej" onclick="exp('rejected')">📥 Export Rejected</button>
+        <button onclick="reset()" style="background:#666;color:white">🔄 Reset</button>
+    </div>
+<script>
+const leads = [
+{n:"Nilothpaul Dutta",t:"Sr. Director of Innovation and Growth",c:"Chesapeake Controls Inc.",l:"Greater Richmond Region",m:1,mu:1,u:"https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4"},
+{n:"Vik Chaudhary",t:"VP Products & Strategic Partnerships",c:"Biological Black Box (BBB) Inc",l:"San Francisco CA",m:2,mu:37,u:"https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE"},
+{n:"Paul Intrevado",t:"Chair Data Institute & AI Advisory Board",c:"The Data Institute USF",l:"San Francisco CA",m:17,mu:2,u:"https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE"},
+{n:"Todd Brown",t:"Director of Product Management",c:"LGI Healthcare Solutions - USA",l:"Knoxville TN",m:2,mu:1,u:"https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY"},
+{n:"John Linford",t:"Entrepreneurship Coach / Head of Product",c:"Leland",l:"Salt Lake City UT",m:18,mu:28,u:"https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA"},
+{n:"Chris Featherstone",t:"Sr. Director of Product Growth",c:"Sanas",l:"Seattle WA",m:3,mu:6,u:"https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI"},
+{n:"Jehan Moghazy",t:"Startup Advisor",c:"Atlanta Tech Village",l:"Atlanta GA",m:2,mu:2,u:"https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg"},
+{n:"Jessica Dubin",t:"Head of Product Timekeeping",c:"Laurel",l:"San Francisco CA",m:3,mu:6,u:"https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0"},
+{n:"William Shell",t:"Director of Product Management",c:"ResMan Property Management Software",l:"Dallas TX",m:3,mu:3,u:"https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs"},
+{n:"Adam Traylor",t:"Director of Technology and Innovation",c:"UNC Kenan-Flagler Executive Development",l:"Raleigh NC",m:3,mu:3,u:"https://www.linkedin.com/sales/lead/ACwAAAPO18sB-iqCEAIZP1UreXR1-6DY10hI1nM"},
+{n:"Daniel Romotsky",t:"Director Product Analytics",c:"Hungryroot",l:"Los Angeles CA",m:2,mu:3,u:"https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ"},
+{n:"Jeffrey Grant",t:"Advisory Board Member & Mentor",c:"IDiyas",l:"Charlotte NC",m:37,mu:2,u:"https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg"},
+{n:"Robert Ellis",t:"Director of Product Management",c:"Curinos",l:"Atlanta GA",m:1,mu:1,u:"https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM"},
+{n:"Kamran Khalid",t:"Head of Initiatives",c:"OpenArt AI",l:"San Francisco Bay Area",m:1,mu:5,u:"https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s"},
+{n:"Laila Grainawi",t:"Vice President Design",c:"Launch Potato",l:"Asheville NC",m:1,mu:1,u:"https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE"},
+{n:"Garrett Lauringson",t:"Member",c:"Supra",l:"United States",m:3,mu:9,u:"https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU"},
+{n:"Becks Wood",t:"Board Member",c:"Envelop",l:"San Francisco Bay Area",m:3,mu:2,u:"https://www.linkedin.com/sales/lead/ACwAAABr_9YBiIKIMKqRhEIGQHNF0qndhSHw-Ck"},
+{n:"Turner N.",t:"Head of Product",c:"Digioh",l:"Houston TX",m:2,mu:7,u:"https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU"},
+{n:"Jeff Pauska MBA",t:"VP of Product Management",c:"IFS Copperleaf",l:"Boca Raton FL",m:1,mu:1,u:"https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U"},
+{n:"Philip Williams",t:"Chief Product Officer",c:"Modaxo",l:"San Francisco Bay Area",m:1,mu:4,u:"https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4"},
+{n:"Luke Schoenberger",t:"SVP of Product Engineering",c:"Freestar",l:"San Diego CA",m:1,mu:4,u:"https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg"},
+{n:"Shweta Madasu",t:"Chief Technology Officer",c:"Mansfield Energy Corp",l:"San Diego CA",m:1,mu:0,u:"https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y"},
+{n:"Michael Tschirhart",t:"Director Product Strategy",c:"Voltava",l:"Ann Arbor MI",m:1,mu:0,u:"https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y"},
+{n:"Sheri H.",t:"VP of Product & Programs",c:"HavocAI",l:"United States",m:2,mu:0,u:"https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4"},
+{n:"Brittany Hart-Jezak",t:"Director Product Development",c:"CAM",l:"St Clair Shores MI",m:51,mu:0,u:"https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU"}
+];
+let idx=0, qual=JSON.parse(localStorage.getItem('rq')||'[]'), rej=JSON.parse(localStorage.getItem('rr')||'[]'), hist=[];
+const done=new Set([...qual,...rej].map(x=>x.u));
+let pool=leads.filter(x=>!done.has(x.u));
+function render(){
+    const el=document.getElementById('card');
+    document.getElementById('qc').textContent=qual.length;
+    document.getElementById('rc').textContent=rej.length;
+    document.getElementById('rm').textContent=pool.length-idx;
+    if(idx>=pool.length){el.innerHTML='<div class="done"><h2>🎉 All Done!</h2><p>'+qual.length+' qualified, '+rej.length+' rejected</p></div>';return;}
+    const p=pool[idx];
+    let badges='';
+    if(p.m<=3)badges+='<span class="badge hot">🔥 New Role ('+p.m+'mo)</span>';
+    if(p.mu>=10)badges+='<span class="badge network">🤝 '+p.mu+' mutuals</span>';
+    else if(p.mu>=5)badges+='<span class="badge network">'+p.mu+' mutuals</span>';
+    el.innerHTML='<div class="card"><div class="name">'+p.n+'</div><div class="title">'+p.t+'</div><div class="info">🏢 '+p.c+'</div><div class="info">📍 '+p.l+'</div><div class="info">⏱️ '+p.m+' months in role</div>'+badges+'</div>';
+}
+function swipe(action){
+    if(idx>=pool.length)return;
+    const p=pool[idx];
+    hist.push({action,idx,p});
+    if(action==='qualify'){qual.push(p);localStorage.setItem('rq',JSON.stringify(qual));}
+    else{rej.push(p);localStorage.setItem('rr',JSON.stringify(rej));}
+    idx++;render();
+}
+function undo(){
+    if(!hist.length)return;
+    const last=hist.pop();idx=last.idx;
+    if(last.action==='qualify'){qual=qual.filter(x=>x.u!==last.p.u);localStorage.setItem('rq',JSON.stringify(qual));}
+    else{rej=rej.filter(x=>x.u!==last.p.u);localStorage.setItem('rr',JSON.stringify(rej));}
+    render();
+}
+function openLI(){if(idx<pool.length)window.open(pool[idx].u,'_blank');}
+function exp(type){
+    const d=type==='qualified'?qual:rej;
+    if(!d.length){alert('No '+type+' leads yet!');return;}
+    const csv='name,title,company,location,url\n'+d.map(r=>'"'+r.n+'","'+r.t+'","'+r.c+'","'+r.l+'","'+r.u+'"').join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=type+'.csv';a.click();
+}
+function reset(){localStorage.removeItem('rq');localStorage.removeItem('rr');location.reload();}
+document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft'||e.key==='j'||e.key==='J')swipe('reject');
+    else if(e.key==='ArrowRight'||e.key==='k'||e.key==='K')swipe('qualify');
+    else if(e.key==='l'||e.key==='L')openLI();
+    else if(e.key==='u'||e.key==='U')undo();
+});
+render();
+</script>
+</body>
+</html>
