@@ -900,28 +900,9 @@ function undo() {
 
 function openLI() {
     if (index >= prospects.length) return;
-    const webUrl = prospects[index].linkedin;
-    // Convert web URL to app deep link for Sales Navigator app
-    const appUrl = webUrl.replace('https://www.linkedin.com/', 'linkedin://');
-    
-    // On mobile, try app scheme - opens Sales Navigator directly if installed
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-        // Create hidden iframe to try app URL (won't disrupt page if app missing)
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appUrl;
-        document.body.appendChild(iframe);
-        
-        // Also try direct location (works better on some devices)
-        setTimeout(() => window.location.href = appUrl, 50);
-        
-        // Cleanup
-        setTimeout(() => iframe.remove(), 2000);
-    } else {
-        window.open(webUrl, '_blank');
-    }
+    const url = prospects[index].linkedin;
+    // Open in new tab - iOS/Android will handle opening in app if configured
+    window.open(url, '_blank');
 }
 
 function updateStats() {
