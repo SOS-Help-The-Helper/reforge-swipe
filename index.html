@@ -120,8 +120,14 @@
         
         .card:active { cursor: grabbing; }
         
-        .card.swiping-left { border-color: var(--red); }
-        .card.swiping-right { border-color: var(--green-bright); }
+        .card.swiping-left { 
+            border-color: var(--red); 
+            background: linear-gradient(135deg, rgba(139, 58, 58, 0.3) 0%, rgba(139, 58, 58, 0.5) 100%);
+        }
+        .card.swiping-right { 
+            border-color: var(--gold); 
+            background: linear-gradient(135deg, rgba(212, 165, 48, 0.25) 0%, rgba(212, 165, 48, 0.45) 100%);
+        }
         
         /* Hot lead accent bar */
         .card.hot-lead::before {
@@ -149,7 +155,7 @@
         }
         
         .swipe-indicator.pass { left: 16px; background: var(--red); color: white; }
-        .swipe-indicator.qualify { right: 16px; background: var(--green); color: white; }
+        .swipe-indicator.qualify { right: 16px; background: var(--gold); color: white; }
         
         .card.swiping-left .swipe-indicator.pass,
         .card.swiping-right .swipe-indicator.qualify { opacity: 1; }
@@ -542,16 +548,16 @@
         
         /* Action feedback - brand color flash */
         .card.flash-pass {
-            border-color: #888 !important;
+            border-color: var(--red-light) !important;
             border-width: 2px !important;
-            background: linear-gradient(135deg, rgba(100, 100, 100, 0.1) 0%, rgba(80, 80, 80, 0.25) 100%) !important;
+            background: linear-gradient(135deg, rgba(139, 58, 58, 0.4) 0%, rgba(139, 58, 58, 0.6) 100%) !important;
             transition: all 0.12s ease-out;
         }
         
         .card.flash-qualify {
-            border-color: var(--green-light) !important;
+            border-color: var(--gold) !important;
             border-width: 2px !important;
-            background: linear-gradient(135deg, rgba(74, 140, 74, 0.15) 0%, rgba(45, 90, 45, 0.35) 100%) !important;
+            background: linear-gradient(135deg, rgba(212, 165, 48, 0.35) 0%, rgba(212, 165, 48, 0.55) 100%) !important;
             transition: all 0.12s ease-out;
         }
         
