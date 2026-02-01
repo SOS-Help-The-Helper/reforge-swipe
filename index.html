@@ -212,22 +212,35 @@
         }
         
         .linkedin-btn {
-            width: 40px;
-            height: 40px;
+            width: 52px;
+            height: 52px;
             background: #0077b5;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
             font-weight: 700;
-            font-size: 0.9375rem;
+            font-size: 1.0625rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.15s;
+            /* Larger tap target */
+            position: relative;
+            margin: -6px;
+            padding: 0;
         }
         
-        .linkedin-btn:active { transform: scale(0.95); }
+        .linkedin-btn::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            bottom: -8px;
+            left: -8px;
+        }
+        
+        .linkedin-btn:active { transform: scale(0.92); }
         
         /* Main info */
         .prospect-name {
