@@ -689,6 +689,10 @@ let qualified = JSON.parse(localStorage.getItem('grunt_qualified') || '[]');
 let rejected = JSON.parse(localStorage.getItem('grunt_rejected') || '[]');
 let history = [];
 
+// Filter out already-swiped prospects
+const swipedNames = new Set([...qualified, ...rejected].map(p => p.name));
+const remaining = prospects.filter(p => !swipedNames.has(p.name));
+
 let startX = 0, currentX = 0, isDragging = false;
 const card = document.getElementById('card');
 
@@ -716,7 +720,7 @@ function getScore(p) {
 
 function setupTouchHandlers() {
     card.addEventListener('touchstart', e => {
-        if (index >= prospects.length) return;
+        if (index >= remaining.length) return;
         startX = e.touches[0].clientX;
         isDragging = true;
         card.style.transition = 'none';
@@ -739,7 +743,7 @@ function setupTouchHandlers() {
     });
     
     card.addEventListener('mousedown', e => {
-        if (index >= prospects.length || e.target.closest('.linkedin-btn, .signal')) return;
+        if (index >= remaining.length || e.target.closest('.linkedin-btn, .signal')) return;
         startX = e.clientX;
         isDragging = true;
         card.style.transition = 'none';
@@ -774,7 +778,7 @@ function resetCard() {
 
 function setupKeyboard() {
     document.addEventListener('keydown', e => {
-        if (index >= prospects.length) return;
+        if (index >= remaining.length) return;
         if (e.key === 'ArrowLeft' || e.key === 'j') swipe('reject');
         if (e.key === 'ArrowRight' || e.key === 'k') swipe('qualify');
         if (e.key === 'l') openLI();
@@ -783,13 +787,13 @@ function setupKeyboard() {
 }
 
 function showCard() {
-    if (index >= prospects.length) { showDone(); return; }
+    if (index >= remaining.length) { showDone(); return; }
     
-    const p = prospects[index];
+    const p = remaining[index];
     const score = getScore(p);
     const isHot = score.grade === 'A';
     
-    document.getElementById('progress').textContent = `${index + 1} of ${prospects.length}`;
+    document.getElementById('progress').textContent = `${index + 1} of ${remaining.length}`;
     
     let signalsHtml = '';
     const s = p.signals;
@@ -881,9 +885,9 @@ function closePopup(e) {
 }
 
 function swipe(action, fromGesture = false) {
-    if (index >= prospects.length) return;
+    if (index >= remaining.length) return;
     
-    const p = prospects[index];
+    const p = remaining[index];
     history.push({ prospect: p, action, index });
     
     // Button feedback (if not from gesture)
@@ -934,8 +938,8 @@ function undo() {
 }
 
 function openLI() {
-    if (index >= prospects.length) return;
-    const url = prospects[index].linkedin;
+    if (index >= remaining.length) return;
+    const url = remaining[index].linkedin;
     // Open in new tab - iOS/Android will handle opening in app if configured
     window.open(url, '_blank');
 }
@@ -943,7 +947,7 @@ function openLI() {
 function updateStats() {
     document.getElementById('qc').textContent = qualified.length;
     document.getElementById('rc').textContent = rejected.length;
-    document.getElementById('rm').textContent = Math.max(0, prospects.length - index);
+    document.getElementById('rm').textContent = Math.max(0, remaining.length - index);
 }
 
 function showDone() {
