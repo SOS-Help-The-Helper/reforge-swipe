@@ -6,20 +6,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Grunt</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #000000;
-            --card-bg: #1c1c1e;
-            --card-border: #2c2c2e;
+            --bg: #0a0f0a;
+            --card-bg: #141f14;
+            --card-border: #1e2e1e;
             --text: #ffffff;
-            --text-secondary: #8e8e93;
-            --accent: #0a84ff;
-            --green: #30d158;
-            --red: #ff453a;
-            --orange: #ff9f0a;
-            --purple: #bf5af2;
+            --text-secondary: #7a917a;
+            --green: #2d5a2d;
+            --green-light: #4a8c4a;
+            --green-bright: #5cb85c;
+            --green-glow: rgba(92, 184, 92, 0.3);
+            --red: #8b3a3a;
+            --red-light: #a85454;
         }
         
         * {
@@ -60,42 +59,36 @@
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--green) 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
         }
         
         .stats-bar {
             display: flex;
             gap: 16px;
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
         
         .stat {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         
-        .stat-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-        
-        .stat-dot.green { background: var(--green); }
-        .stat-dot.red { background: var(--red); }
-        .stat-dot.gray { background: var(--text-secondary); }
+        .stat.qualified { color: var(--green-bright); }
+        .stat.rejected { color: var(--red-light); }
+        .stat.remaining { color: var(--text-secondary); }
         
         /* Main Card Area */
         main {
@@ -113,7 +106,6 @@
             width: 100%;
             max-width: 400px;
             position: relative;
-            perspective: 1000px;
         }
         
         .card {
@@ -123,32 +115,34 @@
             padding: 28px;
             position: relative;
             transform-origin: center;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.1s ease-out, background 0.15s;
             cursor: grab;
-            min-height: 320px;
+            min-height: 340px;
         }
         
-        .card:active {
-            cursor: grabbing;
-        }
+        .card:active { cursor: grabbing; }
         
         .card.swiping-left {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255,69,58,0.1) 100%);
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(139,58,58,0.15) 100%);
+            border-color: var(--red);
         }
         
         .card.swiping-right {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(48,209,88,0.1) 100%);
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(92,184,92,0.1) 100%);
+            border-color: var(--green-light);
         }
         
         .swipe-indicator {
             position: absolute;
             top: 20px;
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 700;
             padding: 8px 16px;
             border-radius: 8px;
             opacity: 0;
             transition: opacity 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .swipe-indicator.pass {
@@ -179,17 +173,17 @@
         
         .prospect-title {
             font-size: 1rem;
-            color: var(--purple);
+            color: var(--green-bright);
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             line-height: 1.4;
         }
         
         .prospect-details {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 24px;
         }
         
         .detail-row {
@@ -203,7 +197,7 @@
             width: 20px;
             text-align: center;
             flex-shrink: 0;
-            opacity: 0.6;
+            color: var(--green-light);
         }
         
         .detail-text {
@@ -225,30 +219,19 @@
         }
         
         .tag {
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 100px;
             font-size: 0.8125rem;
             font-weight: 500;
+            background: rgba(92, 184, 92, 0.1);
+            color: var(--green-bright);
+            border: 1px solid var(--green);
         }
         
         .tag.hot {
-            background: rgba(255,69,58,0.15);
-            color: var(--red);
-        }
-        
-        .tag.network {
-            background: rgba(10,132,255,0.15);
-            color: var(--accent);
-        }
-        
-        .tag.growth {
-            background: rgba(48,209,88,0.15);
-            color: var(--green);
-        }
-        
-        .tag.enterprise {
-            background: rgba(255,159,10,0.15);
-            color: var(--orange);
+            background: rgba(168, 84, 84, 0.15);
+            color: var(--red-light);
+            border-color: var(--red);
         }
         
         /* Controls */
@@ -267,7 +250,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.15s, opacity 0.15s;
+            transition: transform 0.15s, box-shadow 0.15s;
             -webkit-tap-highlight-color: transparent;
         }
         
@@ -288,18 +271,18 @@
         }
         
         .btn-pass {
-            background: linear-gradient(135deg, #ff453a 0%, #d63031 100%);
-            box-shadow: 0 4px 20px rgba(255,69,58,0.4);
+            background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 100%);
+            box-shadow: 0 4px 20px rgba(139, 58, 58, 0.4);
         }
         
         .btn-qualify {
-            background: linear-gradient(135deg, #30d158 0%, #00b341 100%);
-            box-shadow: 0 4px 20px rgba(48,209,88,0.4);
+            background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
+            box-shadow: 0 4px 20px var(--green-glow);
         }
         
         .btn-linkedin {
-            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-            box-shadow: 0 4px 20px rgba(0,119,181,0.3);
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--green) 100%);
+            box-shadow: 0 4px 20px var(--green-glow);
             color: white;
             font-weight: 700;
             font-size: 1rem;
@@ -348,7 +331,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.15s, opacity 0.15s;
+            transition: transform 0.15s;
         }
         
         .export-btn:active {
@@ -356,7 +339,7 @@
         }
         
         .export-btn.primary {
-            background: var(--green);
+            background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
             color: white;
         }
         
@@ -368,7 +351,7 @@
         
         .export-btn.tertiary {
             background: transparent;
-            color: var(--accent);
+            color: var(--green-bright);
         }
         
         /* Keyboard hint */
@@ -421,7 +404,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--green);
             padding: 12px 20px;
             border-radius: 100px;
             font-size: 0.875rem;
@@ -429,6 +412,7 @@
             opacity: 0;
             transition: all 0.3s;
             pointer-events: none;
+            color: var(--green-bright);
         }
         
         .toast.show {
@@ -452,26 +436,15 @@
             <span>Grunt</span>
         </div>
         <div class="stats-bar">
-            <div class="stat">
-                <div class="stat-dot green"></div>
-                <span id="qc">0</span>
-            </div>
-            <div class="stat">
-                <div class="stat-dot red"></div>
-                <span id="rc">0</span>
-            </div>
-            <div class="stat">
-                <div class="stat-dot gray"></div>
-                <span id="rm">0</span>
-            </div>
+            <div class="stat qualified">✓ <span id="qc">0</span></div>
+            <div class="stat rejected">✕ <span id="rc">0</span></div>
+            <div class="stat remaining">◦ <span id="rm">0</span></div>
         </div>
     </header>
     
     <main>
         <div class="card-container">
-            <div id="card" class="card">
-                <!-- Card content injected here -->
-            </div>
+            <div id="card" class="card"></div>
         </div>
     </main>
     
@@ -488,14 +461,14 @@
 <script>
 // Sample data - replace with real prospects
 const prospects = [
-    { name: "Sarah Chen", title: "VP of Growth @ Notion", company: "Notion", location: "San Francisco", connections: 12, tags: ["hot", "growth"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Marcus Thompson", title: "Head of Revenue Ops @ Figma", company: "Figma", location: "New York", connections: 5, tags: ["enterprise"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Emily Rodriguez", title: "Director of Sales Enablement @ Stripe", company: "Stripe", location: "Seattle", connections: 8, tags: ["hot", "network"], linkedin: "https://linkedin.com/in/example" },
-    { name: "David Kim", title: "Chief Revenue Officer @ Linear", company: "Linear", location: "Remote", connections: 3, tags: ["growth"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Jessica Liu", title: "VP Sales @ Vercel", company: "Vercel", location: "San Francisco", connections: 15, tags: ["hot", "enterprise", "network"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Michael Foster", title: "Head of GTM @ Loom", company: "Loom", location: "San Francisco", connections: 7, tags: ["growth"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Amanda Walsh", title: "Director of Demand Gen @ Webflow", company: "Webflow", location: "San Francisco", connections: 4, tags: ["network"], linkedin: "https://linkedin.com/in/example" },
-    { name: "Chris Anderson", title: "VP Marketing @ Airtable", company: "Airtable", location: "San Francisco", connections: 9, tags: ["hot", "enterprise"], linkedin: "https://linkedin.com/in/example" }
+    { name: "Sarah Chen", title: "VP of Growth @ Notion", company: "Notion", location: "San Francisco", connections: 12, tags: ["🔥 Hot"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Sarah%20Chen%20Notion" },
+    { name: "Marcus Thompson", title: "Head of Revenue Ops @ Figma", company: "Figma", location: "New York", connections: 5, tags: ["Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Marcus%20Thompson%20Figma" },
+    { name: "Emily Rodriguez", title: "Director of Sales Enablement @ Stripe", company: "Stripe", location: "Seattle", connections: 8, tags: ["🔥 Hot", "In Network"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Emily%20Rodriguez%20Stripe" },
+    { name: "David Kim", title: "Chief Revenue Officer @ Linear", company: "Linear", location: "Remote", connections: 3, tags: ["Growth"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=David%20Kim%20Linear" },
+    { name: "Jessica Liu", title: "VP Sales @ Vercel", company: "Vercel", location: "San Francisco", connections: 15, tags: ["🔥 Hot", "Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Jessica%20Liu%20Vercel" },
+    { name: "Michael Foster", title: "Head of GTM @ Loom", company: "Loom", location: "San Francisco", connections: 7, tags: ["Growth"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Michael%20Foster%20Loom" },
+    { name: "Amanda Walsh", title: "Director of Demand Gen @ Webflow", company: "Webflow", location: "San Francisco", connections: 4, tags: ["In Network"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Amanda%20Walsh%20Webflow" },
+    { name: "Chris Anderson", title: "VP Marketing @ Airtable", company: "Airtable", location: "San Francisco", connections: 9, tags: ["🔥 Hot", "Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Chris%20Anderson%20Airtable" }
 ];
 
 let index = 0;
@@ -539,7 +512,6 @@ function handleTouchMove(e) {
     currentX = e.touches[0].clientX - startX;
     const currentY = e.touches[0].clientY - startY;
     
-    // If more vertical than horizontal, don't interfere with scroll
     if (Math.abs(currentY) > Math.abs(currentX) && Math.abs(currentX) < 30) {
         return;
     }
@@ -618,24 +590,25 @@ function showCard() {
     }
     
     const p = prospects[index];
-    const tagHtml = p.tags.map(t => `<span class="tag ${t}">${t === 'hot' ? '🔥 Hot Lead' : t === 'network' ? '🔗 In Network' : t === 'growth' ? '📈 Growth' : '🏢 Enterprise'}</span>`).join('');
+    const isHot = p.tags.some(t => t.includes('Hot'));
+    const tagHtml = p.tags.map(t => `<span class="tag ${t.includes('Hot') ? 'hot' : ''}">${t}</span>`).join('');
     
     card.innerHTML = `
-        <div class="swipe-indicator pass">PASS</div>
-        <div class="swipe-indicator qualify">QUALIFY</div>
+        <div class="swipe-indicator pass">Pass</div>
+        <div class="swipe-indicator qualify">Qualify</div>
         <div class="prospect-name">${p.name}</div>
         <div class="prospect-title">${p.title}</div>
         <div class="prospect-details">
             <div class="detail-row">
-                <span class="detail-icon">🏢</span>
+                <span class="detail-icon">◈</span>
                 <span class="detail-text"><strong>${p.company}</strong></span>
             </div>
             <div class="detail-row">
-                <span class="detail-icon">📍</span>
+                <span class="detail-icon">◎</span>
                 <span class="detail-text">${p.location}</span>
             </div>
             <div class="detail-row">
-                <span class="detail-icon">👥</span>
+                <span class="detail-icon">◉</span>
                 <span class="detail-text"><strong>${p.connections}</strong> mutual connections</span>
             </div>
         </div>
@@ -652,7 +625,6 @@ function swipe(action, fromGesture = false) {
     const p = prospects[index];
     history.push({ prospect: p, action: action, index: index });
     
-    // Animate exit
     const exitX = action === 'qualify' ? '150%' : '-150%';
     const exitRotate = action === 'qualify' ? '20deg' : '-20deg';
     card.style.setProperty('--exit-x', exitX);
@@ -701,7 +673,15 @@ function undo() {
 
 function openLI() {
     if (index >= prospects.length) return;
-    window.open(prospects[index].linkedin, '_blank');
+    const p = prospects[index];
+    // If we have a direct LinkedIn URL, use it. Otherwise search.
+    let url = p.linkedin;
+    if (!url || url.includes('example')) {
+        // Fallback: LinkedIn search for name + company
+        const query = encodeURIComponent(`${p.name} ${p.company}`);
+        url = `https://www.linkedin.com/search/results/people/?keywords=${query}`;
+    }
+    window.open(url, '_blank');
 }
 
 function updateStats() {
@@ -714,8 +694,8 @@ function showDone() {
     document.getElementById('controls').style.display = 'none';
     card.innerHTML = `
         <div class="done-state">
-            <div class="done-icon">✨</div>
-            <div class="done-title">All done!</div>
+            <div class="done-icon">✓</div>
+            <div class="done-title">All done</div>
             <div class="done-subtitle">${qualified.length} qualified · ${rejected.length} passed</div>
             <div class="export-buttons">
                 <button class="export-btn primary" onclick="exportCSV('qualified')">Export Qualified</button>
