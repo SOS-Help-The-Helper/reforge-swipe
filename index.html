@@ -400,14 +400,14 @@
             background: transparent;
             border: none;
             color: var(--text-dim);
-            font-size: 0.8125rem;
-            font-weight: 500;
-            padding: 8px 16px;
+            font-size: 1.25rem;
+            padding: 8px 12px;
             border-radius: 20px;
         }
         
-        .btn-undo:hover {
+        .btn-undo:active {
             color: var(--text-secondary);
+            transform: scale(0.9);
         }
         
         /* Popup */
@@ -619,7 +619,7 @@
                 <span class="btn-label">Qualify</span>
             </div>
         </div>
-        <button class="btn btn-undo" onclick="undo()">↩ Undo</button>
+        <button class="btn btn-undo" onclick="undo()">↩</button>
     </div>
     
     <div class="keyboard-hint">← Pass · → Qualify · L LinkedIn · U Undo</div>
