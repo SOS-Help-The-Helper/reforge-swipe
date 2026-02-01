@@ -12,13 +12,16 @@
             --card-bg: #141f14;
             --card-border: #1e2e1e;
             --text: #ffffff;
-            --text-secondary: #7a917a;
+            --text-secondary: #8a9a8a;
+            --text-dim: #5a6a5a;
             --green: #2d5a2d;
             --green-light: #4a8c4a;
             --green-bright: #5cb85c;
             --green-glow: rgba(92, 184, 92, 0.3);
             --red: #8b3a3a;
             --red-light: #a85454;
+            --gold: #d4a530;
+            --blue: #4a90d4;
         }
         
         * {
@@ -40,7 +43,6 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            touch-action: pan-y;
         }
         
         header {
@@ -48,12 +50,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 10;
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.375rem;
             font-weight: 700;
             letter-spacing: -0.5px;
             display: flex;
@@ -62,32 +62,27 @@
         }
         
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, var(--green-light) 0%, var(--green) 100%);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 16px;
         }
         
         .stats-bar {
             display: flex;
-            gap: 16px;
-            font-size: 0.9rem;
+            gap: 12px;
+            font-size: 0.8125rem;
             font-weight: 600;
         }
         
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
+        .stat { display: flex; align-items: center; gap: 4px; }
         .stat.qualified { color: var(--green-bright); }
         .stat.rejected { color: var(--red-light); }
-        .stat.remaining { color: var(--text-secondary); }
+        .stat.remaining { color: var(--text-dim); }
         
         main {
             flex: 1;
@@ -95,223 +90,294 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 20px;
+            padding: 0 16px;
             position: relative;
-            overflow: hidden;
         }
         
         .card-container {
             width: 100%;
-            max-width: 400px;
-            position: relative;
+            max-width: 380px;
+        }
+        
+        .card-progress {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            font-weight: 500;
         }
         
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 28px;
             position: relative;
             transform-origin: center;
-            transition: transform 0.1s ease-out, background 0.15s;
+            transition: transform 0.1s ease-out;
             cursor: grab;
-            min-height: 360px;
+            overflow: hidden;
         }
         
         .card:active { cursor: grabbing; }
         
-        .card.swiping-left {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(139,58,58,0.15) 100%);
-            border-color: var(--red);
-        }
+        .card.swiping-left { border-color: var(--red); }
+        .card.swiping-right { border-color: var(--green-bright); }
         
-        .card.swiping-right {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(92,184,92,0.1) 100%);
-            border-color: var(--green-light);
+        /* Hot lead accent bar */
+        .card.hot-lead::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--gold) 0%, #c49020 100%);
         }
         
         .swipe-indicator {
             position: absolute;
-            top: 20px;
-            font-size: 1rem;
+            top: 16px;
+            font-size: 0.875rem;
             font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 6px;
             opacity: 0;
             transition: opacity 0.15s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            z-index: 10;
         }
         
-        .swipe-indicator.pass {
-            left: 20px;
-            background: var(--red);
-            color: white;
-        }
-        
-        .swipe-indicator.qualify {
-            right: 20px;
-            background: var(--green);
-            color: white;
-        }
+        .swipe-indicator.pass { left: 16px; background: var(--red); color: white; }
+        .swipe-indicator.qualify { right: 16px; background: var(--green); color: white; }
         
         .card.swiping-left .swipe-indicator.pass,
-        .card.swiping-right .swipe-indicator.qualify {
-            opacity: 1;
+        .card.swiping-right .swipe-indicator.qualify { opacity: 1; }
+        
+        /* Card Content */
+        .card-inner {
+            padding: 20px;
         }
         
-        /* Card header with LinkedIn button */
-        .card-header {
+        /* Top row: Score + LinkedIn */
+        .card-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 4px;
+            margin-bottom: 16px;
         }
         
-        .prospect-name {
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            flex: 1;
-            padding-right: 12px;
+        .lead-score {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .score-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.125rem;
+        }
+        
+        .score-badge.score-a {
+            background: linear-gradient(135deg, var(--gold) 0%, #b8922a 100%);
+            color: #1a1a1a;
+        }
+        
+        .score-badge.score-b {
+            background: linear-gradient(135deg, #7a8a7a 0%, #5a6a5a 100%);
+            color: white;
+        }
+        
+        .score-badge.score-c {
+            background: var(--card-border);
+            color: var(--text-secondary);
+        }
+        
+        .score-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+        
+        .score-reason {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
         
         .linkedin-btn {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+            width: 40px;
+            height: 40px;
+            background: #0077b5;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9375rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0 2px 8px rgba(0,119,181,0.3);
+            transition: transform 0.15s;
         }
         
-        .linkedin-btn:active {
-            transform: scale(0.95);
+        .linkedin-btn:active { transform: scale(0.95); }
+        
+        /* Main info */
+        .prospect-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 4px;
         }
         
         .prospect-title {
-            font-size: 1rem;
+            font-size: 0.9375rem;
             color: var(--green-bright);
             font-weight: 500;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            margin-bottom: 16px;
+            line-height: 1.35;
         }
         
-        .prospect-details {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+        /* Company block */
+        .company-block {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
         }
         
-        .detail-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+        .company-name {
+            font-weight: 600;
             font-size: 0.9375rem;
-        }
-        
-        .detail-icon {
-            width: 20px;
-            text-align: center;
-            flex-shrink: 0;
-            color: var(--green-light);
-        }
-        
-        .detail-text {
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-        
-        .detail-text strong {
-            color: var(--text);
-            font-weight: 500;
+            margin-bottom: 4px;
         }
         
         .company-blurb {
+            font-size: 0.8125rem;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 2px;
+            line-height: 1.4;
         }
         
-        /* Signal Tags */
-        .tags {
+        .company-location {
+            font-size: 0.8125rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+        
+        /* Signal tags */
+        .signals {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 16px;
         }
         
-        .tag {
-            padding: 8px 14px;
-            border-radius: 100px;
+        .signal {
+            padding: 8px 12px;
+            border-radius: 8px;
             font-size: 0.8125rem;
-            font-weight: 500;
-            background: rgba(92, 184, 92, 0.1);
-            color: var(--green-bright);
-            border: 1px solid var(--green);
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: transform 0.15s, background 0.15s;
+            transition: transform 0.15s;
+            border: 1px solid transparent;
         }
         
-        .tag:active {
-            transform: scale(0.95);
+        .signal:active { transform: scale(0.97); }
+        
+        .signal .info { 
+            opacity: 0.6; 
+            font-size: 0.6875rem;
+            font-weight: 700;
         }
         
-        .tag .info-icon {
-            width: 14px;
-            height: 14px;
-            background: var(--green);
+        .signal.network {
+            background: rgba(74, 144, 212, 0.15);
+            color: var(--blue);
+            border-color: rgba(74, 144, 212, 0.3);
+        }
+        
+        .signal.new-role {
+            background: rgba(212, 165, 48, 0.15);
+            color: var(--gold);
+            border-color: rgba(212, 165, 48, 0.3);
+        }
+        
+        .signal.funding {
+            background: rgba(92, 184, 92, 0.12);
+            color: var(--green-bright);
+            border-color: rgba(92, 184, 92, 0.25);
+        }
+        
+        .signal.local {
+            background: rgba(168, 84, 168, 0.15);
+            color: #c490c4;
+            border-color: rgba(168, 84, 168, 0.3);
+        }
+        
+        /* Controls */
+        .controls {
+            padding: 20px 20px 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn {
+            border: none;
             border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            font-weight: 700;
-            color: white;
+            transition: transform 0.15s;
         }
         
-        .tag.hot {
-            background: rgba(168, 84, 84, 0.15);
-            color: var(--red-light);
-            border-color: var(--red);
+        .btn:active { transform: scale(0.92); }
+        
+        .btn-main {
+            width: 68px;
+            height: 68px;
+            font-size: 1.75rem;
         }
         
-        .tag.hot .info-icon {
-            background: var(--red);
+        .btn-secondary {
+            width: 48px;
+            height: 48px;
+            font-size: 1.125rem;
         }
         
-        .tag.network {
-            background: rgba(0, 119, 181, 0.15);
-            color: #5ba3d4;
-            border-color: #2d6a8a;
+        .btn-pass {
+            background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 100%);
+            box-shadow: 0 4px 16px rgba(139, 58, 58, 0.4);
         }
         
-        .tag.network .info-icon {
-            background: #2d6a8a;
+        .btn-qualify {
+            background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
+            box-shadow: 0 4px 16px var(--green-glow);
         }
         
-        /* Info Popup */
+        .btn-undo {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+        }
+        
+        /* Popup */
         .popup-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -322,54 +388,44 @@
             padding: 20px;
         }
         
-        .popup-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .popup-overlay.show { opacity: 1; pointer-events: auto; }
         
         .popup {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 24px;
-            max-width: 320px;
+            max-width: 300px;
             width: 100%;
             transform: scale(0.95);
             transition: transform 0.2s;
         }
         
-        .popup-overlay.show .popup {
-            transform: scale(1);
-        }
+        .popup-overlay.show .popup { transform: scale(1); }
         
         .popup-title {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .popup-content {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-        }
-        
-        .popup-content strong {
-            color: var(--text);
         }
         
         .popup-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--card-border);
+            font-size: 0.9375rem;
         }
         
-        .popup-row:last-child {
-            border-bottom: none;
+        .popup-row:last-of-type { border-bottom: none; }
+        .popup-row span:first-child { color: var(--text-secondary); }
+        .popup-row strong { color: var(--text); }
+        
+        .popup-note {
+            margin-top: 16px;
+            font-size: 0.8125rem;
+            color: var(--text-dim);
+            line-height: 1.5;
         }
         
         .popup-close {
@@ -378,187 +434,80 @@
             padding: 14px;
             background: var(--green);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9375rem;
             cursor: pointer;
         }
         
-        /* Controls */
-        .controls {
-            padding: 24px 20px 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-        }
-        
-        .btn {
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.15s, box-shadow 0.15s;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        .btn:active {
-            transform: scale(0.92);
-        }
-        
-        .btn-main {
-            width: 72px;
-            height: 72px;
-            font-size: 2rem;
-        }
-        
-        .btn-secondary {
-            width: 52px;
-            height: 52px;
-            font-size: 1.25rem;
-        }
-        
-        .btn-pass {
-            background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 100%);
-            box-shadow: 0 4px 20px rgba(139, 58, 58, 0.4);
-        }
-        
-        .btn-qualify {
-            background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
-            box-shadow: 0 4px 20px var(--green-glow);
-        }
-        
-        .btn-undo {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-secondary);
-        }
-        
-        /* Done State */
-        .done-state {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .done-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-        
-        .done-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .done-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
+        /* Done state */
+        .done-state { text-align: center; padding: 40px 20px; }
+        .done-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .done-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+        .done-subtitle { color: var(--text-secondary); margin-bottom: 28px; font-size: 0.9375rem; }
         
         .export-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-width: 280px;
+            gap: 10px;
+            max-width: 260px;
             margin: 0 auto;
         }
         
         .export-btn {
-            padding: 16px 24px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 14px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 0.9375rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.15s;
         }
         
-        .export-btn:active {
-            transform: scale(0.97);
-        }
-        
-        .export-btn.primary {
-            background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
-            color: white;
-        }
-        
-        .export-btn.secondary {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text);
-        }
-        
-        .export-btn.tertiary {
-            background: transparent;
-            color: var(--green-bright);
-        }
+        .export-btn.primary { background: var(--green); color: white; }
+        .export-btn.secondary { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text); }
+        .export-btn.tertiary { background: transparent; color: var(--green-bright); }
         
         .keyboard-hint {
             position: fixed;
-            bottom: 12px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            opacity: 0.5;
+            font-size: 0.6875rem;
+            color: var(--text-dim);
             display: none;
         }
         
-        @media (min-width: 768px) {
-            .keyboard-hint { display: block; }
-        }
+        @media (min-width: 768px) { .keyboard-hint { display: block; } }
         
         @keyframes cardExit {
-            to {
-                transform: translateX(var(--exit-x)) rotate(var(--exit-rotate));
-                opacity: 0;
-            }
+            to { transform: translateX(var(--exit-x)) rotate(var(--exit-rotate)); opacity: 0; }
         }
-        
-        .card.exiting {
-            animation: cardExit 0.3s ease-out forwards;
-        }
+        .card.exiting { animation: cardExit 0.3s ease-out forwards; }
         
         @keyframes cardEnter {
-            from {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0.96); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
-        
-        .card.entering {
-            animation: cardEnter 0.25s ease-out;
-        }
+        .card.entering { animation: cardEnter 0.2s ease-out; }
         
         .toast {
             position: fixed;
-            bottom: 100px;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: var(--card-bg);
             border: 1px solid var(--green);
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 100px;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 500;
             opacity: 0;
             transition: all 0.3s;
             pointer-events: none;
             color: var(--green-bright);
         }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         
         @supports (padding: max(0px)) {
             body {
@@ -575,415 +524,63 @@
             <span>Grunt</span>
         </div>
         <div class="stats-bar">
-            <div class="stat qualified">✓ <span id="qc">0</span></div>
-            <div class="stat rejected">✕ <span id="rc">0</span></div>
-            <div class="stat remaining">◦ <span id="rm">0</span></div>
+            <div class="stat qualified">✓<span id="qc">0</span></div>
+            <div class="stat rejected">✗<span id="rc">0</span></div>
+            <div class="stat remaining">•<span id="rm">0</span></div>
         </div>
     </header>
     
     <main>
         <div class="card-container">
+            <div class="card-progress" id="progress"></div>
             <div id="card" class="card"></div>
         </div>
     </main>
     
     <div class="controls" id="controls">
-        <button class="btn btn-secondary btn-undo" onclick="undo()" title="Undo">↩</button>
-        <button class="btn btn-main btn-pass" onclick="swipe('reject')" title="Pass">✕</button>
-        <button class="btn btn-main btn-qualify" onclick="swipe('qualify')" title="Qualify">✓</button>
+        <button class="btn btn-secondary btn-undo" onclick="undo()">↩</button>
+        <button class="btn btn-main btn-pass" onclick="swipe('reject')">✗</button>
+        <button class="btn btn-main btn-qualify" onclick="swipe('qualify')">✓</button>
     </div>
     
     <div class="keyboard-hint">← Pass · → Qualify · L LinkedIn · U Undo</div>
     <div class="toast" id="toast"></div>
     
-    <!-- Info Popup -->
     <div class="popup-overlay" id="popup" onclick="closePopup(event)">
         <div class="popup" onclick="event.stopPropagation()">
             <div class="popup-title" id="popup-title"></div>
-            <div class="popup-content" id="popup-content"></div>
+            <div id="popup-content"></div>
             <button class="popup-close" onclick="closePopup()">Got it</button>
         </div>
     </div>
 
 <script>
-// Real prospect data with signal details
 const prospects = [
-    { 
-        name: "Vik Chaudhary", 
-        title: "Vice President Products & Strategic Partnerships", 
-        company: "Biological Black Box (BBB) Inc", 
-        companyBlurb: "AI-powered clinical decision support for healthcare", 
-        location: "San Francisco CA", 
-        connections: 37, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE",
-        signals: {
-            newRole: { months: 2 },
-            network: { degree: 2, count: 37, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "John Linford", 
-        title: "Entrepreneurship Coach / Head of Product", 
-        company: "Leland", 
-        companyBlurb: "Career coaching marketplace for MBA, law, and tech", 
-        location: "Salt Lake City UT", 
-        connections: 28, 
-        roleMonths: 18, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA",
-        signals: {
-            newRole: null,
-            network: { degree: 2, count: 28, mutuals: ["Via your network"] },
-            funding: { series: "Series B", amount: "$35M", date: "2023" }
-        }
-    },
-    { 
-        name: "Garrett Lauringson", 
-        title: "Member", 
-        company: "Supra", 
-        companyBlurb: "Web3 blockchain infrastructure and development tools", 
-        location: "United States", 
-        connections: 9, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 9, mutuals: ["Via your network"] },
-            funding: { series: "Series A", amount: "$24M", date: "2024" }
-        }
-    },
-    { 
-        name: "Turner N.", 
-        title: "Head of Product", 
-        company: "Digioh", 
-        companyBlurb: "Website personalization and conversion optimization platform", 
-        location: "Houston TX", 
-        connections: 7, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU",
-        signals: {
-            newRole: { months: 2 },
-            network: { degree: 2, count: 7, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Chris Featherstone", 
-        title: "Sr. Director of Product Growth - Developer Experience", 
-        company: "Sanas", 
-        companyBlurb: "Real-time accent translation AI for call centers", 
-        location: "Seattle WA", 
-        connections: 6, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 6, mutuals: ["Via your network"] },
-            funding: { series: "Series B", amount: "$55M", date: "2023" }
-        }
-    },
-    { 
-        name: "Jessica Dubin", 
-        title: "Head of Product Timekeeping", 
-        company: "Laurel", 
-        companyBlurb: "AI-powered time tracking for professional services", 
-        location: "San Francisco CA", 
-        connections: 6, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 6, mutuals: ["Via your network"] },
-            funding: { series: "Series A", amount: "$10M", date: "2022" }
-        }
-    },
-    { 
-        name: "Kamran Khalid", 
-        title: "Head of Initiatives", 
-        company: "OpenArt AI", 
-        companyBlurb: "AI art generation and creative tools platform", 
-        location: "San Francisco Bay Area", 
-        connections: 5, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 5, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Philip Williams", 
-        title: "Chief Product Officer", 
-        company: "Modaxo", 
-        companyBlurb: "Public transit technology and passenger solutions", 
-        location: "San Francisco Bay Area", 
-        connections: 4, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 4, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Luke Schoenberger", 
-        title: "SVP of Product Engineering", 
-        company: "Freestar", 
-        companyBlurb: "Publisher monetization and ad tech platform", 
-        location: "San Diego CA", 
-        connections: 4, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 4, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "William Shell", 
-        title: "Director of Product Management", 
-        company: "ResMan Property Management Software", 
-        companyBlurb: "Property management software for multifamily housing", 
-        location: "Dallas TX", 
-        connections: 3, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Adam Traylor", 
-        title: "Director of Technology and Innovation", 
-        company: "UNC Kenan-Flagler Executive Development", 
-        companyBlurb: "Executive education and leadership programs", 
-        location: "Raleigh NC", 
-        connections: 3, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAO-18sB-iqCEAIZP1UreXR1-6DY10hI1nM",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Daniel Romotsky", 
-        title: "Director Product Analytics", 
-        company: "Hungryroot", 
-        companyBlurb: "AI-powered grocery and meal planning delivery service", 
-        location: "Los Angeles CA", 
-        connections: 3, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ",
-        signals: {
-            newRole: { months: 2 },
-            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
-            funding: { series: "Series D", amount: "$55M", date: "2022" }
-        }
-    },
-    { 
-        name: "Paul Intrevado", 
-        title: "Chair Data Institute & AI Advisory Board", 
-        company: "The Data Institute USF", 
-        companyBlurb: "University research institute for data science education", 
-        location: "San Francisco CA", 
-        connections: 2, 
-        roleMonths: 17, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE",
-        signals: {
-            newRole: null,
-            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Jehan Moghazy", 
-        title: "Startup Advisor", 
-        company: "Atlanta Tech Village", 
-        companyBlurb: "Startup hub and tech entrepreneurship community", 
-        location: "Atlanta GA", 
-        connections: 2, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg",
-        signals: {
-            newRole: { months: 2 },
-            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Jeffrey Grant", 
-        title: "Advisory Board Member & Mentor", 
-        company: "IDiyas", 
-        companyBlurb: "Innovation consulting and startup advisory", 
-        location: "Charlotte NC", 
-        connections: 2, 
-        roleMonths: 37, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg",
-        signals: {
-            newRole: null,
-            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Becks Wood", 
-        title: "Board Member", 
-        company: "Envelop", 
-        companyBlurb: "Risk management platform for real estate investors", 
-        location: "San Francisco Bay Area", 
-        connections: 2, 
-        roleMonths: 3, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABr_9YBiYKIMKqRhEIGQHNF0qndhSHw-Ck",
-        signals: {
-            newRole: { months: 3 },
-            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Nilothpaul Dutta", 
-        title: "Sr. Director of Innovation and Growth", 
-        company: "Chesapeake Controls Inc.", 
-        companyBlurb: "Building automation and control systems", 
-        location: "Greater Richmond Region", 
-        connections: 1, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Todd Brown", 
-        title: "Director of Product Management", 
-        company: "LGI Healthcare Solutions - USA", 
-        companyBlurb: "Healthcare workforce management software", 
-        location: "Knoxville TN", 
-        connections: 1, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY",
-        signals: {
-            newRole: { months: 2 },
-            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Robert Ellis", 
-        title: "Director of Product Management", 
-        company: "Curinos", 
-        companyBlurb: "Data analytics for banking and financial services", 
-        location: "Atlanta GA", 
-        connections: 1, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Laila Grainawi", 
-        title: "Vice President Design", 
-        company: "Launch Potato", 
-        companyBlurb: "Performance marketing and customer acquisition platform", 
-        location: "Asheville NC", 
-        connections: 1, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
-            funding: null,
-            local: true
-        }
-    },
-    { 
-        name: "Jeff Pauska MBA", 
-        title: "VP of Product Management", 
-        company: "IFS Copperleaf", 
-        companyBlurb: "Asset investment planning for utilities and energy", 
-        location: "Boca Raton FL", 
-        connections: 1, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U",
-        signals: {
-            newRole: { months: 1 },
-            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
-            funding: null
-        }
-    },
-    { 
-        name: "Shweta Madasu", 
-        title: "Chief Technology Officer", 
-        company: "Mansfield Energy Corp", 
-        companyBlurb: "Fuel supply chain and energy logistics", 
-        location: "San Diego CA", 
-        connections: 0, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y",
-        signals: {
-            newRole: { months: 1 },
-            network: null,
-            funding: null
-        }
-    },
-    { 
-        name: "Michael Tschirhart", 
-        title: "Director Product Strategy", 
-        company: "Voltava", 
-        companyBlurb: "Healthcare technology solutions", 
-        location: "Ann Arbor MI", 
-        connections: 0, 
-        roleMonths: 1, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y",
-        signals: {
-            newRole: { months: 1 },
-            network: null,
-            funding: null
-        }
-    },
-    { 
-        name: "Sheri H.", 
-        title: "Vice President of Product & Programs", 
-        company: "HavocAI", 
-        companyBlurb: "AI-powered security and threat detection", 
-        location: "United States", 
-        connections: 0, 
-        roleMonths: 2, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4",
-        signals: {
-            newRole: { months: 2 },
-            network: null,
-            funding: null
-        }
-    },
-    { 
-        name: "Brittany Hart-Jezak", 
-        title: "Director Product Development", 
-        company: "CAM", 
-        companyBlurb: "Collection agency management software", 
-        location: "St Clair Shores MI", 
-        connections: 0, 
-        roleMonths: 51, 
-        linkedin: "https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU",
-        signals: {
-            newRole: null,
-            network: null,
-            funding: null
-        }
-    }
+    { name: "Vik Chaudhary", title: "Vice President Products & Strategic Partnerships", company: "Biological Black Box (BBB) Inc", companyBlurb: "AI-powered clinical decision support for healthcare", location: "San Francisco, CA", connections: 37, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE", signals: { newRole: { months: 2 }, network: { degree: 2, count: 37 }, funding: null } },
+    { name: "John Linford", title: "Entrepreneurship Coach / Head of Product", company: "Leland", companyBlurb: "Career coaching marketplace for MBA, law, and tech", location: "Salt Lake City, UT", connections: 28, roleMonths: 18, linkedin: "https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA", signals: { newRole: null, network: { degree: 2, count: 28 }, funding: { series: "Series B", amount: "$35M", date: "2023" } } },
+    { name: "Garrett Lauringson", title: "Member", company: "Supra", companyBlurb: "Web3 blockchain infrastructure and development tools", location: "United States", connections: 9, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU", signals: { newRole: { months: 3 }, network: { degree: 2, count: 9 }, funding: { series: "Series A", amount: "$24M", date: "2024" } } },
+    { name: "Turner N.", title: "Head of Product", company: "Digioh", companyBlurb: "Website personalization and conversion optimization", location: "Houston, TX", connections: 7, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU", signals: { newRole: { months: 2 }, network: { degree: 2, count: 7 }, funding: null } },
+    { name: "Chris Featherstone", title: "Sr. Director of Product Growth", company: "Sanas", companyBlurb: "Real-time accent translation AI for call centers", location: "Seattle, WA", connections: 6, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI", signals: { newRole: { months: 3 }, network: { degree: 2, count: 6 }, funding: { series: "Series B", amount: "$55M", date: "2023" } } },
+    { name: "Jessica Dubin", title: "Head of Product Timekeeping", company: "Laurel", companyBlurb: "AI-powered time tracking for professional services", location: "San Francisco, CA", connections: 6, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0", signals: { newRole: { months: 3 }, network: { degree: 2, count: 6 }, funding: { series: "Series A", amount: "$10M", date: "2022" } } },
+    { name: "Kamran Khalid", title: "Head of Initiatives", company: "OpenArt AI", companyBlurb: "AI art generation and creative tools platform", location: "San Francisco Bay Area", connections: 5, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s", signals: { newRole: { months: 1 }, network: { degree: 2, count: 5 }, funding: null } },
+    { name: "Philip Williams", title: "Chief Product Officer", company: "Modaxo", companyBlurb: "Public transit technology and passenger solutions", location: "San Francisco Bay Area", connections: 4, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4", signals: { newRole: { months: 1 }, network: { degree: 2, count: 4 }, funding: null } },
+    { name: "Luke Schoenberger", title: "SVP of Product Engineering", company: "Freestar", companyBlurb: "Publisher monetization and ad tech platform", location: "San Diego, CA", connections: 4, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg", signals: { newRole: { months: 1 }, network: { degree: 2, count: 4 }, funding: null } },
+    { name: "William Shell", title: "Director of Product Management", company: "ResMan", companyBlurb: "Property management software for multifamily housing", location: "Dallas, TX", connections: 3, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs", signals: { newRole: { months: 3 }, network: { degree: 2, count: 3 }, funding: null } },
+    { name: "Adam Traylor", title: "Director of Technology and Innovation", company: "UNC Kenan-Flagler", companyBlurb: "Executive education and leadership programs", location: "Raleigh, NC", connections: 3, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAO-18sB-iqCEAIZP1UreXR1-6DY10hI1nM", signals: { newRole: { months: 3 }, network: { degree: 2, count: 3 }, funding: null } },
+    { name: "Daniel Romotsky", title: "Director Product Analytics", company: "Hungryroot", companyBlurb: "AI-powered grocery and meal planning service", location: "Los Angeles, CA", connections: 3, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ", signals: { newRole: { months: 2 }, network: { degree: 2, count: 3 }, funding: { series: "Series D", amount: "$55M", date: "2022" } } },
+    { name: "Paul Intrevado", title: "Chair Data Institute & AI Advisory Board", company: "The Data Institute USF", companyBlurb: "University research institute for data science", location: "San Francisco, CA", connections: 2, roleMonths: 17, linkedin: "https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE", signals: { newRole: null, network: { degree: 2, count: 2 }, funding: null } },
+    { name: "Jehan Moghazy", title: "Startup Advisor", company: "Atlanta Tech Village", companyBlurb: "Startup hub and tech entrepreneurship community", location: "Atlanta, GA", connections: 2, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg", signals: { newRole: { months: 2 }, network: { degree: 2, count: 2 }, funding: null } },
+    { name: "Jeffrey Grant", title: "Advisory Board Member & Mentor", company: "IDiyas", companyBlurb: "Innovation consulting and startup advisory", location: "Charlotte, NC", connections: 2, roleMonths: 37, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg", signals: { newRole: null, network: { degree: 2, count: 2 }, funding: null } },
+    { name: "Becks Wood", title: "Board Member", company: "Envelop", companyBlurb: "Risk management platform for real estate investors", location: "San Francisco Bay Area", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABr_9YBiYKIMKqRhEIGQHNF0qndhSHw-Ck", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
+    { name: "Nilothpaul Dutta", title: "Sr. Director of Innovation and Growth", company: "Chesapeake Controls", companyBlurb: "Building automation and control systems", location: "Richmond, VA", connections: 1, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4", signals: { newRole: { months: 1 }, network: { degree: 2, count: 1 }, funding: null } },
+    { name: "Todd Brown", title: "Director of Product Management", company: "LGI Healthcare Solutions", companyBlurb: "Healthcare workforce management software", location: "Knoxville, TN", connections: 1, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY", signals: { newRole: { months: 2 }, network: { degree: 2, count: 1 }, funding: null } },
+    { name: "Robert Ellis", title: "Director of Product Management", company: "Curinos", companyBlurb: "Data analytics for banking and financial services", location: "Atlanta, GA", connections: 1, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM", signals: { newRole: { months: 1 }, network: { degree: 2, count: 1 }, funding: null } },
+    { name: "Laila Grainawi", title: "Vice President Design", company: "Launch Potato", companyBlurb: "Performance marketing and customer acquisition", location: "Asheville, NC", connections: 1, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE", signals: { newRole: { months: 1 }, network: { degree: 2, count: 1 }, funding: null, local: true } },
+    { name: "Jeff Pauska MBA", title: "VP of Product Management", company: "IFS Copperleaf", companyBlurb: "Asset investment planning for utilities", location: "Boca Raton, FL", connections: 1, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U", signals: { newRole: { months: 1 }, network: { degree: 2, count: 1 }, funding: null } },
+    { name: "Shweta Madasu", title: "Chief Technology Officer", company: "Mansfield Energy", companyBlurb: "Fuel supply chain and energy logistics", location: "San Diego, CA", connections: 0, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y", signals: { newRole: { months: 1 }, network: null, funding: null } },
+    { name: "Michael Tschirhart", title: "Director Product Strategy", company: "Voltava", companyBlurb: "Healthcare technology solutions", location: "Ann Arbor, MI", connections: 0, roleMonths: 1, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y", signals: { newRole: { months: 1 }, network: null, funding: null } },
+    { name: "Sheri H.", title: "Vice President of Product & Programs", company: "HavocAI", companyBlurb: "AI-powered security and threat detection", location: "United States", connections: 0, roleMonths: 2, linkedin: "https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4", signals: { newRole: { months: 2 }, network: null, funding: null } },
+    { name: "Brittany Hart-Jezak", title: "Director Product Development", company: "CAM", companyBlurb: "Collection agency management software", location: "St Clair Shores, MI", connections: 0, roleMonths: 51, linkedin: "https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU", signals: { newRole: null, network: null, funding: null } }
 ];
 
 let index = 0;
@@ -991,9 +588,7 @@ let qualified = JSON.parse(localStorage.getItem('grunt_qualified') || '[]');
 let rejected = JSON.parse(localStorage.getItem('grunt_rejected') || '[]');
 let history = [];
 
-let startX = 0;
-let currentX = 0;
-let isDragging = false;
+let startX = 0, currentX = 0, isDragging = false;
 const card = document.getElementById('card');
 
 function init() {
@@ -1003,80 +598,72 @@ function init() {
     setupKeyboard();
 }
 
+function getScore(p) {
+    let score = 0;
+    if (p.connections >= 10) score += 3;
+    else if (p.connections >= 5) score += 2;
+    else if (p.connections >= 1) score += 1;
+    
+    if (p.signals.newRole) score += 2;
+    if (p.signals.funding) score += 2;
+    if (p.signals.local) score += 1;
+    
+    if (score >= 5) return { grade: 'A', reason: 'Strong signals' };
+    if (score >= 3) return { grade: 'B', reason: 'Good fit' };
+    return { grade: 'C', reason: 'Worth a look' };
+}
+
 function setupTouchHandlers() {
-    card.addEventListener('touchstart', handleTouchStart, { passive: true });
-    card.addEventListener('touchmove', handleTouchMove, { passive: false });
-    card.addEventListener('touchend', handleTouchEnd);
-    card.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-}
-
-function handleTouchStart(e) {
-    if (index >= prospects.length) return;
-    startX = e.touches[0].clientX;
-    isDragging = true;
-    card.style.transition = 'none';
-}
-
-function handleTouchMove(e) {
-    if (!isDragging) return;
-    currentX = e.touches[0].clientX - startX;
-    const currentY = e.touches[0].clientY - startX;
+    card.addEventListener('touchstart', e => {
+        if (index >= prospects.length) return;
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        card.style.transition = 'none';
+    }, { passive: true });
     
-    if (Math.abs(currentY) > Math.abs(currentX) && Math.abs(currentX) < 30) return;
+    card.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX - startX;
+        if (Math.abs(currentX) > 10) e.preventDefault();
+        updateCardPosition(currentX);
+    }, { passive: false });
     
-    e.preventDefault();
-    updateCardPosition(currentX);
-}
-
-function handleTouchEnd() {
-    if (!isDragging) return;
-    isDragging = false;
-    card.style.transition = '';
+    card.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.transition = '';
+        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject');
+        else resetCard();
+        currentX = 0;
+    });
     
-    if (Math.abs(currentX) > 100) {
-        swipe(currentX > 0 ? 'qualify' : 'reject', true);
-    } else {
-        resetCard();
-    }
-    currentX = 0;
-}
-
-function handleMouseDown(e) {
-    if (index >= prospects.length) return;
-    if (e.target.closest('.linkedin-btn') || e.target.closest('.tag')) return;
-    startX = e.clientX;
-    isDragging = true;
-    card.style.transition = 'none';
-}
-
-function handleMouseMove(e) {
-    if (!isDragging) return;
-    currentX = e.clientX - startX;
-    updateCardPosition(currentX);
-}
-
-function handleMouseUp() {
-    if (!isDragging) return;
-    isDragging = false;
-    card.style.transition = '';
+    card.addEventListener('mousedown', e => {
+        if (index >= prospects.length || e.target.closest('.linkedin-btn, .signal')) return;
+        startX = e.clientX;
+        isDragging = true;
+        card.style.transition = 'none';
+    });
     
-    if (Math.abs(currentX) > 100) {
-        swipe(currentX > 0 ? 'qualify' : 'reject', true);
-    } else {
-        resetCard();
-    }
-    currentX = 0;
+    document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        currentX = e.clientX - startX;
+        updateCardPosition(currentX);
+    });
+    
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.transition = '';
+        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject');
+        else resetCard();
+        currentX = 0;
+    });
 }
 
 function updateCardPosition(x) {
-    const rotate = x * 0.05;
-    card.style.transform = `translateX(${x}px) rotate(${rotate}deg)`;
-    
-    card.classList.remove('swiping-left', 'swiping-right');
-    if (x < -30) card.classList.add('swiping-left');
-    if (x > 30) card.classList.add('swiping-right');
+    card.style.transform = `translateX(${x}px) rotate(${x * 0.04}deg)`;
+    card.classList.toggle('swiping-left', x < -20);
+    card.classList.toggle('swiping-right', x > 20);
 }
 
 function resetCard() {
@@ -1085,7 +672,7 @@ function resetCard() {
 }
 
 function setupKeyboard() {
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if (index >= prospects.length) return;
         if (e.key === 'ArrowLeft' || e.key === 'j') swipe('reject');
         if (e.key === 'ArrowRight' || e.key === 'k') swipe('qualify');
@@ -1095,75 +682,58 @@ function setupKeyboard() {
 }
 
 function showCard() {
-    if (index >= prospects.length) {
-        showDone();
-        return;
-    }
+    if (index >= prospects.length) { showDone(); return; }
     
     const p = prospects[index];
-    const tags = buildTags(p);
+    const score = getScore(p);
+    const isHot = score.grade === 'A';
     
+    document.getElementById('progress').textContent = `${index + 1} of ${prospects.length}`;
+    
+    let signalsHtml = '';
+    const s = p.signals;
+    
+    if (s.network && s.network.count > 0) {
+        signalsHtml += `<div class="signal network" onclick="showSignal('network', ${s.network.count})">🔗 ${s.network.count} mutual <span class="info">ⓘ</span></div>`;
+    }
+    if (s.newRole) {
+        signalsHtml += `<div class="signal new-role" onclick="showSignal('newRole', ${s.newRole.months})">🔥 ${s.newRole.months}mo in role <span class="info">ⓘ</span></div>`;
+    }
+    if (s.funding) {
+        signalsHtml += `<div class="signal funding" onclick="showSignal('funding', '${s.funding.series}|${s.funding.amount}|${s.funding.date}')">💰 ${s.funding.series} <span class="info">ⓘ</span></div>`;
+    }
+    if (s.local) {
+        signalsHtml += `<div class="signal local" onclick="showSignal('local', null)">📍 Local <span class="info">ⓘ</span></div>`;
+    }
+    
+    card.className = 'card' + (isHot ? ' hot-lead' : '');
     card.innerHTML = `
         <div class="swipe-indicator pass">Pass</div>
         <div class="swipe-indicator qualify">Qualify</div>
-        <div class="card-header">
+        <div class="card-inner">
+            <div class="card-top">
+                <div class="lead-score">
+                    <div class="score-badge score-${score.grade.toLowerCase()}">${score.grade}</div>
+                    <div>
+                        <div class="score-label">LEAD SCORE</div>
+                        <div class="score-reason">${score.reason}</div>
+                    </div>
+                </div>
+                <button class="linkedin-btn" onclick="openLI()">in</button>
+            </div>
             <div class="prospect-name">${p.name}</div>
-            <button class="linkedin-btn" onclick="openLI()" title="View on LinkedIn">in</button>
-        </div>
-        <div class="prospect-title">${p.title}</div>
-        <div class="prospect-details">
-            <div class="detail-row">
-                <span class="detail-icon">◈</span>
-                <span class="detail-text">
-                    <strong>${p.company}</strong>
-                    <div class="company-blurb">${p.companyBlurb}</div>
-                </span>
+            <div class="prospect-title">${p.title}</div>
+            <div class="company-block">
+                <div class="company-name">${p.company}</div>
+                <div class="company-blurb">${p.companyBlurb}</div>
+                <div class="company-location">📍 ${p.location}</div>
             </div>
-            <div class="detail-row">
-                <span class="detail-icon">◎</span>
-                <span class="detail-text">${p.location}</span>
-            </div>
+            <div class="signals">${signalsHtml}</div>
         </div>
-        <div class="tags">${tags}</div>
     `;
     
     card.classList.add('entering');
-    setTimeout(() => card.classList.remove('entering'), 250);
-}
-
-function buildTags(p) {
-    let html = '';
-    const s = p.signals;
-    
-    // New Role tag
-    if (s.newRole) {
-        html += `<div class="tag hot" onclick="showSignal('newRole', ${JSON.stringify(s.newRole).replace(/"/g, '&quot;')})">
-            🔥 New Role <span class="info-icon">i</span>
-        </div>`;
-    }
-    
-    // Network tag
-    if (s.network && s.network.count > 0) {
-        html += `<div class="tag network" onclick="showSignal('network', ${JSON.stringify(s.network).replace(/"/g, '&quot;')})">
-            🔗 ${s.network.count} Mutual <span class="info-icon">i</span>
-        </div>`;
-    }
-    
-    // Funding tag
-    if (s.funding) {
-        html += `<div class="tag" onclick="showSignal('funding', ${JSON.stringify(s.funding).replace(/"/g, '&quot;')})">
-            💰 ${s.funding.series} <span class="info-icon">i</span>
-        </div>`;
-    }
-    
-    // Local tag
-    if (s.local) {
-        html += `<div class="tag" onclick="showSignal('local', {})">
-            📍 Local <span class="info-icon">i</span>
-        </div>`;
-    }
-    
-    return html;
+    setTimeout(() => card.classList.remove('entering'), 200);
 }
 
 function showSignal(type, data) {
@@ -1171,40 +741,33 @@ function showSignal(type, data) {
     const title = document.getElementById('popup-title');
     const content = document.getElementById('popup-content');
     
-    if (type === 'newRole') {
-        title.innerHTML = '🔥 New Role Signal';
-        content.innerHTML = `
-            <div class="popup-row"><span>Time in role</span><strong>${data.months} month${data.months !== 1 ? 's' : ''}</strong></div>
-            <p style="margin-top: 16px; color: var(--text-secondary);">
-                People in new roles are actively looking to make an impact and more open to new tools and approaches.
-            </p>
-        `;
-    } else if (type === 'network') {
+    if (type === 'network') {
         title.innerHTML = '🔗 Network Signal';
         content.innerHTML = `
-            <div class="popup-row"><span>Connection degree</span><strong>${data.degree}${data.degree === 1 ? 'st' : 'nd'}</strong></div>
-            <div class="popup-row"><span>Mutual connections</span><strong>${data.count}</strong></div>
-            <p style="margin-top: 16px; color: var(--text-secondary);">
-                ${data.mutuals[0]}
-            </p>
+            <div class="popup-row"><span>Mutual connections</span><strong>${data}</strong></div>
+            <div class="popup-row"><span>Connection degree</span><strong>2nd</strong></div>
+            <p class="popup-note">More mutual connections = warmer intro opportunity. Consider asking for an introduction.</p>
+        `;
+    } else if (type === 'newRole') {
+        title.innerHTML = '🔥 New Role Signal';
+        content.innerHTML = `
+            <div class="popup-row"><span>Time in role</span><strong>${data} month${data !== 1 ? 's' : ''}</strong></div>
+            <p class="popup-note">New hires are actively looking to make an impact. They're more open to new tools and building relationships.</p>
         `;
     } else if (type === 'funding') {
+        const [series, amount, date] = data.split('|');
         title.innerHTML = '💰 Funding Signal';
         content.innerHTML = `
-            <div class="popup-row"><span>Round</span><strong>${data.series}</strong></div>
-            <div class="popup-row"><span>Amount</span><strong>${data.amount}</strong></div>
-            <div class="popup-row"><span>Date</span><strong>${data.date}</strong></div>
-            <p style="margin-top: 16px; color: var(--text-secondary);">
-                Recently funded companies are actively hiring and investing in new tools.
-            </p>
+            <div class="popup-row"><span>Round</span><strong>${series}</strong></div>
+            <div class="popup-row"><span>Amount</span><strong>${amount}</strong></div>
+            <div class="popup-row"><span>Date</span><strong>${date}</strong></div>
+            <p class="popup-note">Recently funded companies have budget and pressure to grow fast. Great time to reach out.</p>
         `;
     } else if (type === 'local') {
         title.innerHTML = '📍 Local Signal';
         content.innerHTML = `
             <div class="popup-row"><span>Location</span><strong>Asheville, NC</strong></div>
-            <p style="margin-top: 16px; color: var(--text-secondary);">
-                Local connection - opportunity for in-person meeting.
-            </p>
+            <p class="popup-note">Local connection! Opportunity for coffee or in-person meeting.</p>
         `;
     }
     
@@ -1216,51 +779,39 @@ function closePopup(e) {
     document.getElementById('popup').classList.remove('show');
 }
 
-function swipe(action, fromGesture = false) {
+function swipe(action) {
     if (index >= prospects.length) return;
     
     const p = prospects[index];
-    history.push({ prospect: p, action: action, index: index });
+    history.push({ prospect: p, action, index });
     
-    const exitX = action === 'qualify' ? '150%' : '-150%';
-    const exitRotate = action === 'qualify' ? '20deg' : '-20deg';
-    card.style.setProperty('--exit-x', exitX);
-    card.style.setProperty('--exit-rotate', exitRotate);
+    card.style.setProperty('--exit-x', action === 'qualify' ? '120%' : '-120%');
+    card.style.setProperty('--exit-rotate', action === 'qualify' ? '15deg' : '-15deg');
     card.classList.add('exiting');
     
     setTimeout(() => {
         card.classList.remove('exiting', 'swiping-left', 'swiping-right');
         card.style.transform = '';
         
-        if (action === 'qualify') {
-            qualified.push(p);
-            localStorage.setItem('grunt_qualified', JSON.stringify(qualified));
-        } else {
-            rejected.push(p);
-            localStorage.setItem('grunt_rejected', JSON.stringify(rejected));
-        }
+        (action === 'qualify' ? qualified : rejected).push(p);
+        localStorage.setItem(action === 'qualify' ? 'grunt_qualified' : 'grunt_rejected', 
+            JSON.stringify(action === 'qualify' ? qualified : rejected));
         
         index++;
         updateStats();
         showCard();
-    }, 250);
+    }, 200);
 }
 
 function undo() {
-    if (history.length === 0) {
-        showToast('Nothing to undo');
-        return;
-    }
+    if (!history.length) return showToast('Nothing to undo');
     
     const last = history.pop();
+    const arr = last.action === 'qualify' ? qualified : rejected;
+    const idx = arr.findIndex(p => p.name === last.prospect.name);
+    if (idx > -1) arr.splice(idx, 1);
     
-    if (last.action === 'qualify') {
-        qualified = qualified.filter(p => p.name !== last.prospect.name);
-        localStorage.setItem('grunt_qualified', JSON.stringify(qualified));
-    } else {
-        rejected = rejected.filter(p => p.name !== last.prospect.name);
-        localStorage.setItem('grunt_rejected', JSON.stringify(rejected));
-    }
+    localStorage.setItem(last.action === 'qualify' ? 'grunt_qualified' : 'grunt_rejected', JSON.stringify(arr));
     
     index = last.index;
     updateStats();
@@ -1269,8 +820,7 @@ function undo() {
 }
 
 function openLI() {
-    if (index >= prospects.length) return;
-    window.open(prospects[index].linkedin, '_blank');
+    if (index < prospects.length) window.open(prospects[index].linkedin, '_blank');
 }
 
 function updateStats() {
@@ -1281,10 +831,12 @@ function updateStats() {
 
 function showDone() {
     document.getElementById('controls').style.display = 'none';
+    document.getElementById('progress').textContent = '';
+    card.className = 'card';
     card.innerHTML = `
         <div class="done-state">
             <div class="done-icon">✓</div>
-            <div class="done-title">All done</div>
+            <div class="done-title">All done!</div>
             <div class="done-subtitle">${qualified.length} qualified · ${rejected.length} passed</div>
             <div class="export-buttons">
                 <button class="export-btn primary" onclick="exportCSV('qualified')">Export Qualified</button>
@@ -1297,32 +849,22 @@ function showDone() {
 
 function exportCSV(type) {
     const data = type === 'qualified' ? qualified : rejected;
-    if (data.length === 0) {
-        showToast('Nothing to export');
-        return;
-    }
+    if (!data.length) return showToast('Nothing to export');
     
-    const headers = ['Name', 'Title', 'Company', 'Location', 'Connections', 'LinkedIn'];
-    const rows = data.map(p => [p.name, p.title, p.company, p.location, p.connections, p.linkedin]);
-    const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    const csv = [['Name','Title','Company','Location','Connections','LinkedIn'],
+        ...data.map(p => [p.name, p.title, p.company, p.location, p.connections, p.linkedin])]
+        .map(r => r.map(c => `"${c}"`).join(',')).join('\n');
     
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     a.download = `grunt-${type}-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
-    URL.revokeObjectURL(url);
-    
-    showToast(`Exported ${data.length} prospects`);
+    showToast(`Exported ${data.length}`);
 }
 
 function resetAll() {
-    if (!confirm('Clear all progress and start over?')) return;
-    qualified = [];
-    rejected = [];
-    history = [];
-    index = 0;
+    if (!confirm('Clear all progress?')) return;
+    qualified = []; rejected = []; history = []; index = 0;
     localStorage.removeItem('grunt_qualified');
     localStorage.removeItem('grunt_rejected');
     document.getElementById('controls').style.display = 'flex';
@@ -1331,10 +873,10 @@ function resetAll() {
 }
 
 function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
 }
 
 init();
