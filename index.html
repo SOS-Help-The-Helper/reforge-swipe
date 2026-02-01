@@ -43,7 +43,6 @@
             touch-action: pan-y;
         }
         
-        /* Header */
         header {
             padding: 16px 20px;
             display: flex;
@@ -90,7 +89,6 @@
         .stat.rejected { color: var(--red-light); }
         .stat.remaining { color: var(--text-secondary); }
         
-        /* Main Card Area */
         main {
             flex: 1;
             display: flex;
@@ -117,7 +115,7 @@
             transform-origin: center;
             transition: transform 0.1s ease-out, background 0.15s;
             cursor: grab;
-            min-height: 340px;
+            min-height: 360px;
         }
         
         .card:active { cursor: grabbing; }
@@ -162,28 +160,58 @@
             opacity: 1;
         }
         
-        /* Card Content */
+        /* Card header with LinkedIn button */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+        
         .prospect-name {
             font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: -0.5px;
-            margin-bottom: 4px;
             line-height: 1.2;
+            flex: 1;
+            padding-right: 12px;
+        }
+        
+        .linkedin-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 2px 8px rgba(0,119,181,0.3);
+        }
+        
+        .linkedin-btn:active {
+            transform: scale(0.95);
         }
         
         .prospect-title {
             font-size: 1rem;
             color: var(--green-bright);
             font-weight: 500;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             line-height: 1.4;
         }
         
         .prospect-details {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         
         .detail-row {
@@ -210,7 +238,13 @@
             font-weight: 500;
         }
         
-        /* Tags */
+        .company-blurb {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+        
+        /* Signal Tags */
         .tags {
             display: flex;
             flex-wrap: wrap;
@@ -219,13 +253,35 @@
         }
         
         .tag {
-            padding: 6px 14px;
+            padding: 8px 14px;
             border-radius: 100px;
             font-size: 0.8125rem;
             font-weight: 500;
             background: rgba(92, 184, 92, 0.1);
             color: var(--green-bright);
             border: 1px solid var(--green);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.15s, background 0.15s;
+        }
+        
+        .tag:active {
+            transform: scale(0.95);
+        }
+        
+        .tag .info-icon {
+            width: 14px;
+            height: 14px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
         }
         
         .tag.hot {
@@ -234,13 +290,108 @@
             border-color: var(--red);
         }
         
+        .tag.hot .info-icon {
+            background: var(--red);
+        }
+        
+        .tag.network {
+            background: rgba(0, 119, 181, 0.15);
+            color: #5ba3d4;
+            border-color: #2d6a8a;
+        }
+        
+        .tag.network .info-icon {
+            background: #2d6a8a;
+        }
+        
+        /* Info Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            padding: 20px;
+        }
+        
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .popup {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 320px;
+            width: 100%;
+            transform: scale(0.95);
+            transition: transform 0.2s;
+        }
+        
+        .popup-overlay.show .popup {
+            transform: scale(1);
+        }
+        
+        .popup-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .popup-content {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+        
+        .popup-content strong {
+            color: var(--text);
+        }
+        
+        .popup-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .popup-row:last-child {
+            border-bottom: none;
+        }
+        
+        .popup-close {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            background: var(--green);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
         /* Controls */
         .controls {
             padding: 24px 20px 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
         
         .btn {
@@ -278,14 +429,6 @@
         .btn-qualify {
             background: linear-gradient(135deg, var(--green-bright) 0%, var(--green) 100%);
             box-shadow: 0 4px 20px var(--green-glow);
-        }
-        
-        .btn-linkedin {
-            background: linear-gradient(135deg, var(--green-light) 0%, var(--green) 100%);
-            box-shadow: 0 4px 20px var(--green-glow);
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
         }
         
         .btn-undo {
@@ -354,7 +497,6 @@
             color: var(--green-bright);
         }
         
-        /* Keyboard hint */
         .keyboard-hint {
             position: fixed;
             bottom: 12px;
@@ -370,7 +512,6 @@
             .keyboard-hint { display: block; }
         }
         
-        /* Animations */
         @keyframes cardExit {
             to {
                 transform: translateX(var(--exit-x)) rotate(var(--exit-rotate));
@@ -397,7 +538,6 @@
             animation: cardEnter 0.25s ease-out;
         }
         
-        /* Toast notifications */
         .toast {
             position: fixed;
             bottom: 100px;
@@ -420,7 +560,6 @@
             transform: translateX(-50%) translateY(0);
         }
         
-        /* iOS safe areas */
         @supports (padding: max(0px)) {
             body {
                 padding-top: max(0px, env(safe-area-inset-top));
@@ -451,41 +590,400 @@
     <div class="controls" id="controls">
         <button class="btn btn-secondary btn-undo" onclick="undo()" title="Undo">↩</button>
         <button class="btn btn-main btn-pass" onclick="swipe('reject')" title="Pass">✕</button>
-        <button class="btn btn-secondary btn-linkedin" onclick="openLI()" title="LinkedIn">in</button>
         <button class="btn btn-main btn-qualify" onclick="swipe('qualify')" title="Qualify">✓</button>
     </div>
     
     <div class="keyboard-hint">← Pass · → Qualify · L LinkedIn · U Undo</div>
     <div class="toast" id="toast"></div>
+    
+    <!-- Info Popup -->
+    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
+        <div class="popup" onclick="event.stopPropagation()">
+            <div class="popup-title" id="popup-title"></div>
+            <div class="popup-content" id="popup-content"></div>
+            <button class="popup-close" onclick="closePopup()">Got it</button>
+        </div>
+    </div>
 
 <script>
-// Real prospect data from job_changers_priority.csv
+// Real prospect data with signal details
 const prospects = [
-    { name: "Vik Chaudhary", title: "Vice President Products & Strategic Partnerships", company: "Biological Black Box (BBB) Inc", companyBlurb: "AI-powered clinical decision support for healthcare", location: "San Francisco CA", connections: 37, roleMonths: 2, tags: ["🔥 New Role", "🔗 Strong Network"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE" },
-    { name: "John Linford", title: "Entrepreneurship Coach / Head of Product", company: "Leland", companyBlurb: "Career coaching marketplace for MBA, law, and tech", location: "Salt Lake City UT", connections: 28, roleMonths: 18, tags: ["🔗 Strong Network"], linkedin: "https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA" },
-    { name: "Garrett Lauringson", title: "Member", company: "Supra", companyBlurb: "Web3 blockchain infrastructure and development tools", location: "United States", connections: 9, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU" },
-    { name: "Turner N.", title: "Head of Product", company: "Digioh", companyBlurb: "Website personalization and conversion optimization platform", location: "Houston TX", connections: 7, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU" },
-    { name: "Chris Featherstone", title: "Sr. Director of Product Growth - Developer Experience", company: "Sanas", companyBlurb: "Real-time accent translation AI for call centers", location: "Seattle WA", connections: 6, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI" },
-    { name: "Jessica Dubin", title: "Head of Product Timekeeping", company: "Laurel", companyBlurb: "AI-powered time tracking for professional services", location: "San Francisco CA", connections: 6, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0" },
-    { name: "Kamran Khalid", title: "Head of Initiatives", company: "OpenArt AI", companyBlurb: "AI art generation and creative tools platform", location: "San Francisco Bay Area", connections: 5, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s" },
-    { name: "Philip Williams", title: "Chief Product Officer", company: "Modaxo", companyBlurb: "Public transit technology and passenger solutions", location: "San Francisco Bay Area", connections: 4, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4" },
-    { name: "Luke Schoenberger", title: "SVP of Product Engineering", company: "Freestar", companyBlurb: "Publisher monetization and ad tech platform", location: "San Diego CA", connections: 4, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg" },
-    { name: "William Shell", title: "Director of Product Management", company: "ResMan Property Management Software", companyBlurb: "Property management software for multifamily housing", location: "Dallas TX", connections: 3, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs" },
-    { name: "Adam Traylor", title: "Director of Technology and Innovation", company: "UNC Kenan-Flagler Executive Development", companyBlurb: "Executive education and leadership programs", location: "Raleigh NC", connections: 3, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAO-18sB-iqCEAIZP1UreXR1-6DY10hI1nM" },
-    { name: "Daniel Romotsky", title: "Director Product Analytics", company: "Hungryroot", companyBlurb: "AI-powered grocery and meal planning delivery service", location: "Los Angeles CA", connections: 3, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ" },
-    { name: "Paul Intrevado", title: "Chair Data Institute & AI Advisory Board", company: "The Data Institute USF", companyBlurb: "University research institute for data science education", location: "San Francisco CA", connections: 2, roleMonths: 17, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE" },
-    { name: "Jehan Moghazy", title: "Startup Advisor", company: "Atlanta Tech Village", companyBlurb: "Startup hub and tech entrepreneurship community", location: "Atlanta GA", connections: 2, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg" },
-    { name: "Jeffrey Grant", title: "Advisory Board Member & Mentor", company: "IDiyas", companyBlurb: "Innovation consulting and startup advisory", location: "Charlotte NC", connections: 2, roleMonths: 37, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg" },
-    { name: "Becks Wood", title: "Board Member", company: "Envelop", companyBlurb: "Risk management platform for real estate investors", location: "San Francisco Bay Area", connections: 2, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABr_9YBiYKIMKqRhEIGQHNF0qndhSHw-Ck" },
-    { name: "Nilothpaul Dutta", title: "Sr. Director of Innovation and Growth", company: "Chesapeake Controls Inc.", companyBlurb: "Building automation and control systems", location: "Greater Richmond Region", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4" },
-    { name: "Todd Brown", title: "Director of Product Management", company: "LGI Healthcare Solutions - USA", companyBlurb: "Healthcare workforce management software", location: "Knoxville TN", connections: 1, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY" },
-    { name: "Robert Ellis", title: "Director of Product Management", company: "Curinos", companyBlurb: "Data analytics for banking and financial services", location: "Atlanta GA", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM" },
-    { name: "Laila Grainawi", title: "Vice President Design", company: "Launch Potato", companyBlurb: "Performance marketing and customer acquisition platform", location: "Asheville NC", connections: 1, roleMonths: 1, tags: ["🔥 New Role", "📍 Local"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE" },
-    { name: "Jeff Pauska MBA", title: "VP of Product Management", company: "IFS Copperleaf", companyBlurb: "Asset investment planning for utilities and energy", location: "Boca Raton FL", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U" },
-    { name: "Shweta Madasu", title: "Chief Technology Officer", company: "Mansfield Energy Corp", companyBlurb: "Fuel supply chain and energy logistics", location: "San Diego CA", connections: 0, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y" },
-    { name: "Michael Tschirhart", title: "Director Product Strategy", company: "Voltava", companyBlurb: "Healthcare technology solutions", location: "Ann Arbor MI", connections: 0, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y" },
-    { name: "Sheri H.", title: "Vice President of Product & Programs", company: "HavocAI", companyBlurb: "AI-powered security and threat detection", location: "United States", connections: 0, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4" },
-    { name: "Brittany Hart-Jezak", title: "Director Product Development", company: "CAM", companyBlurb: "Collection agency management software", location: "St Clair Shores MI", connections: 0, roleMonths: 51, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU" }
+    { 
+        name: "Vik Chaudhary", 
+        title: "Vice President Products & Strategic Partnerships", 
+        company: "Biological Black Box (BBB) Inc", 
+        companyBlurb: "AI-powered clinical decision support for healthcare", 
+        location: "San Francisco CA", 
+        connections: 37, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE",
+        signals: {
+            newRole: { months: 2 },
+            network: { degree: 2, count: 37, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "John Linford", 
+        title: "Entrepreneurship Coach / Head of Product", 
+        company: "Leland", 
+        companyBlurb: "Career coaching marketplace for MBA, law, and tech", 
+        location: "Salt Lake City UT", 
+        connections: 28, 
+        roleMonths: 18, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA",
+        signals: {
+            newRole: null,
+            network: { degree: 2, count: 28, mutuals: ["Via your network"] },
+            funding: { series: "Series B", amount: "$35M", date: "2023" }
+        }
+    },
+    { 
+        name: "Garrett Lauringson", 
+        title: "Member", 
+        company: "Supra", 
+        companyBlurb: "Web3 blockchain infrastructure and development tools", 
+        location: "United States", 
+        connections: 9, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 9, mutuals: ["Via your network"] },
+            funding: { series: "Series A", amount: "$24M", date: "2024" }
+        }
+    },
+    { 
+        name: "Turner N.", 
+        title: "Head of Product", 
+        company: "Digioh", 
+        companyBlurb: "Website personalization and conversion optimization platform", 
+        location: "Houston TX", 
+        connections: 7, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU",
+        signals: {
+            newRole: { months: 2 },
+            network: { degree: 2, count: 7, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Chris Featherstone", 
+        title: "Sr. Director of Product Growth - Developer Experience", 
+        company: "Sanas", 
+        companyBlurb: "Real-time accent translation AI for call centers", 
+        location: "Seattle WA", 
+        connections: 6, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 6, mutuals: ["Via your network"] },
+            funding: { series: "Series B", amount: "$55M", date: "2023" }
+        }
+    },
+    { 
+        name: "Jessica Dubin", 
+        title: "Head of Product Timekeeping", 
+        company: "Laurel", 
+        companyBlurb: "AI-powered time tracking for professional services", 
+        location: "San Francisco CA", 
+        connections: 6, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 6, mutuals: ["Via your network"] },
+            funding: { series: "Series A", amount: "$10M", date: "2022" }
+        }
+    },
+    { 
+        name: "Kamran Khalid", 
+        title: "Head of Initiatives", 
+        company: "OpenArt AI", 
+        companyBlurb: "AI art generation and creative tools platform", 
+        location: "San Francisco Bay Area", 
+        connections: 5, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 5, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Philip Williams", 
+        title: "Chief Product Officer", 
+        company: "Modaxo", 
+        companyBlurb: "Public transit technology and passenger solutions", 
+        location: "San Francisco Bay Area", 
+        connections: 4, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 4, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Luke Schoenberger", 
+        title: "SVP of Product Engineering", 
+        company: "Freestar", 
+        companyBlurb: "Publisher monetization and ad tech platform", 
+        location: "San Diego CA", 
+        connections: 4, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 4, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "William Shell", 
+        title: "Director of Product Management", 
+        company: "ResMan Property Management Software", 
+        companyBlurb: "Property management software for multifamily housing", 
+        location: "Dallas TX", 
+        connections: 3, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Adam Traylor", 
+        title: "Director of Technology and Innovation", 
+        company: "UNC Kenan-Flagler Executive Development", 
+        companyBlurb: "Executive education and leadership programs", 
+        location: "Raleigh NC", 
+        connections: 3, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAO-18sB-iqCEAIZP1UreXR1-6DY10hI1nM",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Daniel Romotsky", 
+        title: "Director Product Analytics", 
+        company: "Hungryroot", 
+        companyBlurb: "AI-powered grocery and meal planning delivery service", 
+        location: "Los Angeles CA", 
+        connections: 3, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ",
+        signals: {
+            newRole: { months: 2 },
+            network: { degree: 2, count: 3, mutuals: ["Via your network"] },
+            funding: { series: "Series D", amount: "$55M", date: "2022" }
+        }
+    },
+    { 
+        name: "Paul Intrevado", 
+        title: "Chair Data Institute & AI Advisory Board", 
+        company: "The Data Institute USF", 
+        companyBlurb: "University research institute for data science education", 
+        location: "San Francisco CA", 
+        connections: 2, 
+        roleMonths: 17, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE",
+        signals: {
+            newRole: null,
+            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Jehan Moghazy", 
+        title: "Startup Advisor", 
+        company: "Atlanta Tech Village", 
+        companyBlurb: "Startup hub and tech entrepreneurship community", 
+        location: "Atlanta GA", 
+        connections: 2, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg",
+        signals: {
+            newRole: { months: 2 },
+            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Jeffrey Grant", 
+        title: "Advisory Board Member & Mentor", 
+        company: "IDiyas", 
+        companyBlurb: "Innovation consulting and startup advisory", 
+        location: "Charlotte NC", 
+        connections: 2, 
+        roleMonths: 37, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg",
+        signals: {
+            newRole: null,
+            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Becks Wood", 
+        title: "Board Member", 
+        company: "Envelop", 
+        companyBlurb: "Risk management platform for real estate investors", 
+        location: "San Francisco Bay Area", 
+        connections: 2, 
+        roleMonths: 3, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABr_9YBiYKIMKqRhEIGQHNF0qndhSHw-Ck",
+        signals: {
+            newRole: { months: 3 },
+            network: { degree: 2, count: 2, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Nilothpaul Dutta", 
+        title: "Sr. Director of Innovation and Growth", 
+        company: "Chesapeake Controls Inc.", 
+        companyBlurb: "Building automation and control systems", 
+        location: "Greater Richmond Region", 
+        connections: 1, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Todd Brown", 
+        title: "Director of Product Management", 
+        company: "LGI Healthcare Solutions - USA", 
+        companyBlurb: "Healthcare workforce management software", 
+        location: "Knoxville TN", 
+        connections: 1, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY",
+        signals: {
+            newRole: { months: 2 },
+            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Robert Ellis", 
+        title: "Director of Product Management", 
+        company: "Curinos", 
+        companyBlurb: "Data analytics for banking and financial services", 
+        location: "Atlanta GA", 
+        connections: 1, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Laila Grainawi", 
+        title: "Vice President Design", 
+        company: "Launch Potato", 
+        companyBlurb: "Performance marketing and customer acquisition platform", 
+        location: "Asheville NC", 
+        connections: 1, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
+            funding: null,
+            local: true
+        }
+    },
+    { 
+        name: "Jeff Pauska MBA", 
+        title: "VP of Product Management", 
+        company: "IFS Copperleaf", 
+        companyBlurb: "Asset investment planning for utilities and energy", 
+        location: "Boca Raton FL", 
+        connections: 1, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U",
+        signals: {
+            newRole: { months: 1 },
+            network: { degree: 2, count: 1, mutuals: ["Via your network"] },
+            funding: null
+        }
+    },
+    { 
+        name: "Shweta Madasu", 
+        title: "Chief Technology Officer", 
+        company: "Mansfield Energy Corp", 
+        companyBlurb: "Fuel supply chain and energy logistics", 
+        location: "San Diego CA", 
+        connections: 0, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y",
+        signals: {
+            newRole: { months: 1 },
+            network: null,
+            funding: null
+        }
+    },
+    { 
+        name: "Michael Tschirhart", 
+        title: "Director Product Strategy", 
+        company: "Voltava", 
+        companyBlurb: "Healthcare technology solutions", 
+        location: "Ann Arbor MI", 
+        connections: 0, 
+        roleMonths: 1, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y",
+        signals: {
+            newRole: { months: 1 },
+            network: null,
+            funding: null
+        }
+    },
+    { 
+        name: "Sheri H.", 
+        title: "Vice President of Product & Programs", 
+        company: "HavocAI", 
+        companyBlurb: "AI-powered security and threat detection", 
+        location: "United States", 
+        connections: 0, 
+        roleMonths: 2, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4",
+        signals: {
+            newRole: { months: 2 },
+            network: null,
+            funding: null
+        }
+    },
+    { 
+        name: "Brittany Hart-Jezak", 
+        title: "Director Product Development", 
+        company: "CAM", 
+        companyBlurb: "Collection agency management software", 
+        location: "St Clair Shores MI", 
+        connections: 0, 
+        roleMonths: 51, 
+        linkedin: "https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU",
+        signals: {
+            newRole: null,
+            network: null,
+            funding: null
+        }
+    }
 ];
 
 let index = 0;
@@ -493,9 +991,7 @@ let qualified = JSON.parse(localStorage.getItem('grunt_qualified') || '[]');
 let rejected = JSON.parse(localStorage.getItem('grunt_rejected') || '[]');
 let history = [];
 
-// Touch handling
 let startX = 0;
-let startY = 0;
 let currentX = 0;
 let isDragging = false;
 const card = document.getElementById('card');
@@ -519,7 +1015,6 @@ function setupTouchHandlers() {
 function handleTouchStart(e) {
     if (index >= prospects.length) return;
     startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
     isDragging = true;
     card.style.transition = 'none';
 }
@@ -527,11 +1022,9 @@ function handleTouchStart(e) {
 function handleTouchMove(e) {
     if (!isDragging) return;
     currentX = e.touches[0].clientX - startX;
-    const currentY = e.touches[0].clientY - startY;
+    const currentY = e.touches[0].clientY - startX;
     
-    if (Math.abs(currentY) > Math.abs(currentX) && Math.abs(currentX) < 30) {
-        return;
-    }
+    if (Math.abs(currentY) > Math.abs(currentX) && Math.abs(currentX) < 30) return;
     
     e.preventDefault();
     updateCardPosition(currentX);
@@ -552,6 +1045,7 @@ function handleTouchEnd() {
 
 function handleMouseDown(e) {
     if (index >= prospects.length) return;
+    if (e.target.closest('.linkedin-btn') || e.target.closest('.tag')) return;
     startX = e.clientX;
     isDragging = true;
     card.style.transition = 'none';
@@ -607,36 +1101,119 @@ function showCard() {
     }
     
     const p = prospects[index];
-    const tagHtml = p.tags.map(t => `<span class="tag ${t.includes('🔥') ? 'hot' : ''}">${t}</span>`).join('');
+    const tags = buildTags(p);
     
     card.innerHTML = `
         <div class="swipe-indicator pass">Pass</div>
         <div class="swipe-indicator qualify">Qualify</div>
-        <div class="prospect-name">${p.name}</div>
+        <div class="card-header">
+            <div class="prospect-name">${p.name}</div>
+            <button class="linkedin-btn" onclick="openLI()" title="View on LinkedIn">in</button>
+        </div>
         <div class="prospect-title">${p.title}</div>
         <div class="prospect-details">
             <div class="detail-row">
                 <span class="detail-icon">◈</span>
-                <span class="detail-text"><strong>${p.company}</strong><br><span style="color: var(--text-secondary); font-size: 0.85rem;">${p.companyBlurb}</span></span>
+                <span class="detail-text">
+                    <strong>${p.company}</strong>
+                    <div class="company-blurb">${p.companyBlurb}</div>
+                </span>
             </div>
             <div class="detail-row">
                 <span class="detail-icon">◎</span>
                 <span class="detail-text">${p.location}</span>
             </div>
-            <div class="detail-row">
-                <span class="detail-icon">◉</span>
-                <span class="detail-text"><strong>${p.connections}</strong> mutual connections</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-icon">⏱</span>
-                <span class="detail-text"><strong>${p.roleMonths}</strong> ${p.roleMonths === 1 ? 'month' : 'months'} in role</span>
-            </div>
         </div>
-        <div class="tags">${tagHtml}</div>
+        <div class="tags">${tags}</div>
     `;
     
     card.classList.add('entering');
     setTimeout(() => card.classList.remove('entering'), 250);
+}
+
+function buildTags(p) {
+    let html = '';
+    const s = p.signals;
+    
+    // New Role tag
+    if (s.newRole) {
+        html += `<div class="tag hot" onclick="showSignal('newRole', ${JSON.stringify(s.newRole).replace(/"/g, '&quot;')})">
+            🔥 New Role <span class="info-icon">i</span>
+        </div>`;
+    }
+    
+    // Network tag
+    if (s.network && s.network.count > 0) {
+        html += `<div class="tag network" onclick="showSignal('network', ${JSON.stringify(s.network).replace(/"/g, '&quot;')})">
+            🔗 ${s.network.count} Mutual <span class="info-icon">i</span>
+        </div>`;
+    }
+    
+    // Funding tag
+    if (s.funding) {
+        html += `<div class="tag" onclick="showSignal('funding', ${JSON.stringify(s.funding).replace(/"/g, '&quot;')})">
+            💰 ${s.funding.series} <span class="info-icon">i</span>
+        </div>`;
+    }
+    
+    // Local tag
+    if (s.local) {
+        html += `<div class="tag" onclick="showSignal('local', {})">
+            📍 Local <span class="info-icon">i</span>
+        </div>`;
+    }
+    
+    return html;
+}
+
+function showSignal(type, data) {
+    const popup = document.getElementById('popup');
+    const title = document.getElementById('popup-title');
+    const content = document.getElementById('popup-content');
+    
+    if (type === 'newRole') {
+        title.innerHTML = '🔥 New Role Signal';
+        content.innerHTML = `
+            <div class="popup-row"><span>Time in role</span><strong>${data.months} month${data.months !== 1 ? 's' : ''}</strong></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">
+                People in new roles are actively looking to make an impact and more open to new tools and approaches.
+            </p>
+        `;
+    } else if (type === 'network') {
+        title.innerHTML = '🔗 Network Signal';
+        content.innerHTML = `
+            <div class="popup-row"><span>Connection degree</span><strong>${data.degree}${data.degree === 1 ? 'st' : 'nd'}</strong></div>
+            <div class="popup-row"><span>Mutual connections</span><strong>${data.count}</strong></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">
+                ${data.mutuals[0]}
+            </p>
+        `;
+    } else if (type === 'funding') {
+        title.innerHTML = '💰 Funding Signal';
+        content.innerHTML = `
+            <div class="popup-row"><span>Round</span><strong>${data.series}</strong></div>
+            <div class="popup-row"><span>Amount</span><strong>${data.amount}</strong></div>
+            <div class="popup-row"><span>Date</span><strong>${data.date}</strong></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">
+                Recently funded companies are actively hiring and investing in new tools.
+            </p>
+        `;
+    } else if (type === 'local') {
+        title.innerHTML = '📍 Local Signal';
+        content.innerHTML = `
+            <div class="popup-row"><span>Location</span><strong>Asheville, NC</strong></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">
+                Local connection - opportunity for in-person meeting.
+            </p>
+        `;
+    }
+    
+    popup.classList.add('show');
+}
+
+function closePopup(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('popup').classList.remove('show');
 }
 
 function swipe(action, fromGesture = false) {
@@ -693,15 +1270,7 @@ function undo() {
 
 function openLI() {
     if (index >= prospects.length) return;
-    const p = prospects[index];
-    // If we have a direct LinkedIn URL, use it. Otherwise search.
-    let url = p.linkedin;
-    if (!url || url.includes('example')) {
-        // Fallback: LinkedIn search for name + company
-        const query = encodeURIComponent(`${p.name} ${p.company}`);
-        url = `https://www.linkedin.com/search/results/people/?keywords=${query}`;
-    }
-    window.open(url, '_blank');
+    window.open(prospects[index].linkedin, '_blank');
 }
 
 function updateStats() {
@@ -733,8 +1302,8 @@ function exportCSV(type) {
         return;
     }
     
-    const headers = ['Name', 'Title', 'Company', 'Location', 'Connections', 'Tags', 'LinkedIn'];
-    const rows = data.map(p => [p.name, p.title, p.company, p.location, p.connections, p.tags.join('; '), p.linkedin]);
+    const headers = ['Name', 'Title', 'Company', 'Location', 'Connections', 'LinkedIn'];
+    const rows = data.map(p => [p.name, p.title, p.company, p.location, p.connections, p.linkedin]);
     const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
     
     const blob = new Blob([csv], { type: 'text/csv' });
