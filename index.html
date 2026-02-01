@@ -523,17 +523,19 @@
         }
         .card.entering { animation: cardEnter 0.2s ease-out; }
         
-        /* Action feedback - border color pulse */
+        /* Action feedback - bright color flash */
         .card.flash-pass {
-            border-color: var(--red-light) !important;
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(168, 84, 84, 0.2) 100%) !important;
-            transition: all 0.15s ease-out;
+            border-color: #ff6b6b !important;
+            border-width: 2px !important;
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.15) 0%, rgba(200, 60, 60, 0.35) 100%) !important;
+            transition: all 0.12s ease-out;
         }
         
         .card.flash-qualify {
-            border-color: var(--green-bright) !important;
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(92, 184, 92, 0.15) 100%) !important;
-            transition: all 0.15s ease-out;
+            border-color: #6bff6b !important;
+            border-width: 2px !important;
+            background: linear-gradient(135deg, rgba(100, 255, 100, 0.1) 0%, rgba(60, 200, 60, 0.3) 100%) !important;
+            transition: all 0.12s ease-out;
         }
         
         /* Button press feedback */
