@@ -459,16 +459,33 @@
     <div class="toast" id="toast"></div>
 
 <script>
-// Sample data - replace with real prospects
+// Real prospect data from job_changers_priority.csv
 const prospects = [
-    { name: "Sarah Chen", title: "VP of Growth @ Notion", company: "Notion", location: "San Francisco", connections: 12, tags: ["🔥 Hot"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Sarah%20Chen%20Notion" },
-    { name: "Marcus Thompson", title: "Head of Revenue Ops @ Figma", company: "Figma", location: "New York", connections: 5, tags: ["Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Marcus%20Thompson%20Figma" },
-    { name: "Emily Rodriguez", title: "Director of Sales Enablement @ Stripe", company: "Stripe", location: "Seattle", connections: 8, tags: ["🔥 Hot", "In Network"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Emily%20Rodriguez%20Stripe" },
-    { name: "David Kim", title: "Chief Revenue Officer @ Linear", company: "Linear", location: "Remote", connections: 3, tags: ["Growth"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=David%20Kim%20Linear" },
-    { name: "Jessica Liu", title: "VP Sales @ Vercel", company: "Vercel", location: "San Francisco", connections: 15, tags: ["🔥 Hot", "Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Jessica%20Liu%20Vercel" },
-    { name: "Michael Foster", title: "Head of GTM @ Loom", company: "Loom", location: "San Francisco", connections: 7, tags: ["Growth"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Michael%20Foster%20Loom" },
-    { name: "Amanda Walsh", title: "Director of Demand Gen @ Webflow", company: "Webflow", location: "San Francisco", connections: 4, tags: ["In Network"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Amanda%20Walsh%20Webflow" },
-    { name: "Chris Anderson", title: "VP Marketing @ Airtable", company: "Airtable", location: "San Francisco", connections: 9, tags: ["🔥 Hot", "Enterprise"], linkedin: "https://www.linkedin.com/search/results/people/?keywords=Chris%20Anderson%20Airtable" }
+    { name: "Vik Chaudhary", title: "Vice President Products & Strategic Partnerships", company: "Biological Black Box (BBB) Inc", location: "San Francisco CA", connections: 37, roleMonths: 2, tags: ["🔥 New Role", "🔗 Strong Network"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE" },
+    { name: "John Linford", title: "Entrepreneurship Coach / Head of Product", company: "Leland", location: "Salt Lake City UT", connections: 28, roleMonths: 18, tags: ["🔗 Strong Network"], linkedin: "https://www.linkedin.com/sales/lead/ACwAACY0C5UB5mHJK4oJKAVTxHH64M2-TCpLLuA" },
+    { name: "Garrett Lauringson", title: "Member", company: "Supra", location: "United States", connections: 9, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAC7ER9ABSes45VEY9CfKMQnHrN5hxNVdNYU" },
+    { name: "Turner N.", title: "Head of Product", company: "Digioh", location: "Houston TX", connections: 7, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALU5c0B2ZhXqADiIA6_di4Tff4a2s5mrcU" },
+    { name: "Chris Featherstone", title: "Sr. Director of Product Growth - Developer Experience", company: "Sanas", location: "Seattle WA", connections: 6, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFjrpAB_OyOGboH6I5qUydTO8uSYbDqyyI" },
+    { name: "Jessica Dubin", title: "Head of Product Timekeeping", company: "Laurel", location: "San Francisco CA", connections: 6, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALIAzkBDlcELiTfH_IqKwDptbpk_d637U0" },
+    { name: "Kamran Khalid", title: "Head of Initiatives", company: "OpenArt AI", location: "San Francisco Bay Area", connections: 5, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAswQzoBZtkOvTrvwULrEklQ-1MKhOPTy5s" },
+    { name: "Philip Williams", title: "Chief Product Officer", company: "Modaxo", location: "San Francisco Bay Area", connections: 4, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAArbbZMBROh2HboNsehrrrdhxrRgqfPg8x4" },
+    { name: "Luke Schoenberger", title: "SVP of Product Engineering", company: "Freestar", location: "San Diego CA", connections: 4, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAABR3LsgB43azDUEHsdHk-DZJPyNaxwQvgrg" },
+    { name: "William Shell", title: "Director of Product Management", company: "ResMan Property Management Software", location: "Dallas TX", connections: 3, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIu0yIBpIwdK6ikMregJsbYJWBAR3WphGs" },
+    { name: "Adam Traylor", title: "Director of Technology and Innovation", company: "UNC Kenan-Flagler Executive Development", location: "Raleigh NC", connections: 3, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAO-18sB-iqCEAIZP1UreXR1-6DY10hI1nM" },
+    { name: "Daniel Romotsky", title: "Director Product Analytics", company: "Hungryroot", location: "Los Angeles CA", connections: 3, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAACZe_EBNMrXIrjyF8pG4u4FkvX1DdoKysQ" },
+    { name: "Paul Intrevado", title: "Chair Data Institute & AI Advisory Board", company: "The Data Institute USF", location: "San Francisco CA", connections: 2, roleMonths: 17, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAABp0OFQBTB-M4G4gJA7R_-E4nBESRDppWHE" },
+    { name: "Jehan Moghazy", title: "Startup Advisor", company: "Atlanta Tech Village", location: "Atlanta GA", connections: 2, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABV284B52yhI1xuu1a-UiSj6DaGp5CuPOg" },
+    { name: "Jeffrey Grant", title: "Advisory Board Member & Mentor", company: "IDiyas", location: "Charlotte NC", connections: 2, roleMonths: 37, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAMAIBA7WtctyssqfQZvKIUUTM0hGmUyg" },
+    { name: "Becks Wood", title: "Board Member", company: "Envelop", location: "San Francisco Bay Area", connections: 2, roleMonths: 3, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABr_9YBiYKIMKqRhEIGQHNF0qndhSHw-Ck" },
+    { name: "Nilothpaul Dutta", title: "Sr. Director of Innovation and Growth", company: "Chesapeake Controls Inc.", location: "Greater Richmond Region", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAACf1asBtfxxlBPs-ECQZmK-6PeQCHwolA4" },
+    { name: "Todd Brown", title: "Director of Product Management", company: "LGI Healthcare Solutions - USA", location: "Knoxville TN", connections: 1, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY" },
+    { name: "Robert Ellis", title: "Director of Product Management", company: "Curinos", location: "Atlanta GA", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAALm8dsBSxnNceC2ynIHhewEBRuCEH18YtM" },
+    { name: "Laila Grainawi", title: "Vice President Design", company: "Launch Potato", location: "Asheville NC", connections: 1, roleMonths: 1, tags: ["🔥 New Role", "📍 Local"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPM3kgBkRT6_N0gbn-CS6Fq-UHU-m0JAkE" },
+    { name: "Jeff Pauska MBA", title: "VP of Product Management", company: "IFS Copperleaf", location: "Boca Raton FL", connections: 1, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAUK120B05DWORE9qDShU-LAM03tRHdhn2U" },
+    { name: "Shweta Madasu", title: "Chief Technology Officer", company: "Mansfield Energy Corp", location: "San Diego CA", connections: 0, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAAPTIdgBmTt0efNVkIy2Qno5ZXaB4QSzD_Y" },
+    { name: "Michael Tschirhart", title: "Director Product Strategy", company: "Voltava", location: "Ann Arbor MI", connections: 0, roleMonths: 1, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAABSSJcBPw-fgqn5eT31Tzzp_KyHYJv_x6Y" },
+    { name: "Sheri H.", title: "Vice President of Product & Programs", company: "HavocAI", location: "United States", connections: 0, roleMonths: 2, tags: ["🔥 New Role"], linkedin: "https://www.linkedin.com/sales/lead/ACwAAADmj68BW7ZaeKqXilipDdGtDTg_I58ScU4" },
+    { name: "Brittany Hart-Jezak", title: "Director Product Development", company: "CAM", location: "St Clair Shores MI", connections: 0, roleMonths: 51, tags: [], linkedin: "https://www.linkedin.com/sales/lead/ACwAACt_UncBN5obPCx2iGyJfVhg6DK61ch31hU" }
 ];
 
 let index = 0;
@@ -590,8 +607,7 @@ function showCard() {
     }
     
     const p = prospects[index];
-    const isHot = p.tags.some(t => t.includes('Hot'));
-    const tagHtml = p.tags.map(t => `<span class="tag ${t.includes('Hot') ? 'hot' : ''}">${t}</span>`).join('');
+    const tagHtml = p.tags.map(t => `<span class="tag ${t.includes('🔥') ? 'hot' : ''}">${t}</span>`).join('');
     
     card.innerHTML = `
         <div class="swipe-indicator pass">Pass</div>
@@ -610,6 +626,10 @@ function showCard() {
             <div class="detail-row">
                 <span class="detail-icon">◉</span>
                 <span class="detail-text"><strong>${p.connections}</strong> mutual connections</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-icon">⏱</span>
+                <span class="detail-text"><strong>${p.roleMonths}</strong> ${p.roleMonths === 1 ? 'month' : 'months'} in role</span>
             </div>
         </div>
         <div class="tags">${tagHtml}</div>
