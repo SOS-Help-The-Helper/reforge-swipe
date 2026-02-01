@@ -504,16 +504,49 @@
         
         @media (min-width: 768px) { .keyboard-hint { display: block; } }
         
-        @keyframes cardExit {
-            to { transform: translateX(var(--exit-x)) rotate(var(--exit-rotate)); opacity: 0; }
+        @keyframes cardExitLeft {
+            0% { transform: translateX(0) rotate(0); opacity: 1; }
+            100% { transform: translateX(-120%) rotate(-12deg); opacity: 0; }
         }
-        .card.exiting { animation: cardExit 0.3s ease-out forwards; }
+        
+        @keyframes cardExitRight {
+            0% { transform: translateX(0) rotate(0); opacity: 1; }
+            100% { transform: translateX(120%) rotate(12deg); opacity: 0; }
+        }
+        
+        .card.exiting-left { animation: cardExitLeft 0.25s ease-in forwards; }
+        .card.exiting-right { animation: cardExitRight 0.25s ease-in forwards; }
         
         @keyframes cardEnter {
-            from { transform: scale(0.96); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            0% { transform: scale(0.92) translateY(10px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
         }
         .card.entering { animation: cardEnter 0.2s ease-out; }
+        
+        /* Action feedback flash */
+        @keyframes flashPass {
+            0% { box-shadow: inset 0 0 0 0 rgba(168, 84, 84, 0); }
+            50% { box-shadow: inset 0 0 60px 20px rgba(168, 84, 84, 0.3); }
+            100% { box-shadow: inset 0 0 0 0 rgba(168, 84, 84, 0); }
+        }
+        
+        @keyframes flashQualify {
+            0% { box-shadow: inset 0 0 0 0 rgba(92, 184, 92, 0); }
+            50% { box-shadow: inset 0 0 60px 20px rgba(92, 184, 92, 0.25); }
+            100% { box-shadow: inset 0 0 0 0 rgba(92, 184, 92, 0); }
+        }
+        
+        .card.flash-pass { animation: flashPass 0.2s ease-out; }
+        .card.flash-qualify { animation: flashQualify 0.2s ease-out; }
+        
+        /* Button press feedback */
+        @keyframes btnPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.85); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn.pressing { animation: btnPop 0.15s ease-out; }
         
         .toast {
             position: fixed;
@@ -664,7 +697,7 @@ function setupTouchHandlers() {
         if (!isDragging) return;
         isDragging = false;
         card.style.transition = '';
-        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject');
+        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject', true);
         else resetCard();
         currentX = 0;
     });
@@ -686,7 +719,7 @@ function setupTouchHandlers() {
         if (!isDragging) return;
         isDragging = false;
         card.style.transition = '';
-        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject');
+        if (Math.abs(currentX) > 80) swipe(currentX > 0 ? 'qualify' : 'reject', true);
         else resetCard();
         currentX = 0;
     });
@@ -811,28 +844,39 @@ function closePopup(e) {
     document.getElementById('popup').classList.remove('show');
 }
 
-function swipe(action) {
+function swipe(action, fromGesture = false) {
     if (index >= prospects.length) return;
     
     const p = prospects[index];
     history.push({ prospect: p, action, index });
     
-    card.style.setProperty('--exit-x', action === 'qualify' ? '120%' : '-120%');
-    card.style.setProperty('--exit-rotate', action === 'qualify' ? '15deg' : '-15deg');
-    card.classList.add('exiting');
+    // Button feedback (if not from gesture)
+    if (!fromGesture) {
+        const btn = document.querySelector(action === 'qualify' ? '.btn-qualify' : '.btn-pass');
+        btn.classList.add('pressing');
+        setTimeout(() => btn.classList.remove('pressing'), 150);
+    }
+    
+    // Flash + exit animation
+    card.classList.add(action === 'qualify' ? 'flash-qualify' : 'flash-pass');
     
     setTimeout(() => {
-        card.classList.remove('exiting', 'swiping-left', 'swiping-right');
-        card.style.transform = '';
+        card.classList.remove('flash-qualify', 'flash-pass', 'swiping-left', 'swiping-right');
+        card.classList.add(action === 'qualify' ? 'exiting-right' : 'exiting-left');
         
-        (action === 'qualify' ? qualified : rejected).push(p);
-        localStorage.setItem(action === 'qualify' ? 'grunt_qualified' : 'grunt_rejected', 
-            JSON.stringify(action === 'qualify' ? qualified : rejected));
-        
-        index++;
-        updateStats();
-        showCard();
-    }, 200);
+        setTimeout(() => {
+            card.classList.remove('exiting-left', 'exiting-right');
+            card.style.transform = '';
+            
+            (action === 'qualify' ? qualified : rejected).push(p);
+            localStorage.setItem(action === 'qualify' ? 'grunt_qualified' : 'grunt_rejected', 
+                JSON.stringify(action === 'qualify' ? qualified : rejected));
+            
+            index++;
+            updateStats();
+            showCard();
+        }, 200);
+    }, 100);
 }
 
 function undo() {
