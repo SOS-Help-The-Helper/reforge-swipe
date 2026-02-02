@@ -656,71 +656,2010 @@
     </div>
 
 <script>
-const prospects = [
-    { name: "Leonardo Iker De Souza Valladao", title: "Gerente de productos", company: "Paywalls.ai", companyBlurb: "Recently changed roles", location: "Las Palmas de Gran Canaria, Canary Islands, Spain", connections: 47, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABVAjdwBPap23OxAwK9eaO74CzV9SzxIy_k,NAME_SEARCH,Srei", signals: { newRole: { months: 3 }, network: { degree: 2, count: 47 }, funding: null } },
-    { name: "Vik Chaudhary", title: "Vice President Products & Strategic Partnerships", company: "Biological Black Box (BBB), Inc", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 37, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAAYbYBRMETvuR4lfwOqw43fz8fc8w7ydE,NAME_SEARCH,-3X8", signals: { newRole: { months: 3 }, network: { degree: 2, count: 37 }, funding: null } },
-    { name: "Brennan M. Woodruff", title: "Chicago Co-lead", company: "The AI Collective", companyBlurb: "Recently changed roles", location: "Chicago, Illinois, United States", connections: 29, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAZrrzoBbJX-yqCCNuNZEhlF6nGZszzO-cY,NAME_SEARCH,Sg8Q", signals: { newRole: { months: 3 }, network: { degree: 2, count: 29 }, funding: null } },
-    { name: "Ryan Pollock", title: "VP, Go-to-Market (GTM)", company: "FriendliAI", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 27, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAlzbMBBJM-BqQqe6FW8H5JjM2PlXqn8ow,NAME_SEARCH,Kioe", signals: { newRole: { months: 3 }, network: { degree: 2, count: 27 }, funding: null } },
-    { name: "Jeff Ford", title: "Advisory Board Member", company: "Aviso AI", companyBlurb: "Recently changed roles", location: "Scottsdale, Arizona, United States", connections: 19, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAADM0lABZ7GtPjnIecPeGrs6WWXWU1S7A2I,NAME_SEARCH,_myo", signals: { newRole: { months: 3 }, network: { degree: 2, count: 19 }, funding: null } },
-    { name: "McDonald Predelus", title: "Creative Director Ai 2030 Podcast Host", company: "AI 2030", companyBlurb: "Recently changed roles", location: "Chicago, Illinois, United States", connections: 18, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAL-dQQBi2zJZeCE3jejaaAM77740_hZgTQ,NAME_SEARCH,3f0B", signals: { newRole: { months: 3 }, network: { degree: 2, count: 18 }, funding: null } },
-    { name: "Kieran N. Blanks, MBA", title: "Chief Product Officer, Head of New Ventures", company: "OHUB", companyBlurb: "Recently changed roles", location: "Atlanta Metropolitan Area", connections: 11, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAI_aroB_k1o3kanvjpn8VK18dI8bpmLNrw,NAME_SEARCH,jDl7", signals: { newRole: { months: 3 }, network: { degree: 2, count: 11 }, funding: null } },
-    { name: "Graham Broomfield", title: "Managing Director", company: "Austen & Blake", companyBlurb: "Recently changed roles", location: "United Kingdom", connections: 10, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAvTTMBv0SFTaDUAlIJO7kbuv91qJHGWwg,NAME_SEARCH,ZpZ4", signals: { newRole: { months: 3 }, network: { degree: 2, count: 10 }, funding: null } },
-    { name: "Areeb Mianoor", title: "Global AI Ambassador", company: "Hack-Nation's Global AI Hackathon", companyBlurb: "Recently changed roles", location: "Toronto, Ontario, Canada", connections: 9, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAB-xXZEB2aNsNHA3piVZd1nJvLtZ40FTl2o,NAME_SEARCH,YUIa", signals: { newRole: { months: 3 }, network: { degree: 2, count: 9 }, funding: null } },
-    { name: "Kate Makrigiannis", title: "Senior AI Product Manager", company: "Artium AI", companyBlurb: "Recently changed roles", location: "San Francisco Bay Area", connections: 9, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAK2z6sBnX2CdIVDYTD_RW_eLXCZSqiOgQ4,NAME_SEARCH,mN41", signals: { newRole: { months: 3 }, network: { degree: 2, count: 9 }, funding: null } },
-    { name: "Eran Barak", title: "Chief Executive Officer", company: "Shielded Technologies", companyBlurb: "Recently changed roles", location: "New York, New York, United States", connections: 8, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAABs6oBZ6TLHr4XwoqqCmW423LNSx5nhQg,NAME_SEARCH,Xn1m", signals: { newRole: { months: 3 }, network: { degree: 2, count: 8 }, funding: null } },
-    { name: "Mark Milinkovich", title: "Director of Product Marketing", company: "Arango", companyBlurb: "Recently changed roles", location: "Atlanta, Georgia, United States", connections: 8, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAZwecBiLFiVlR-mFP-WDV91S64cHdoUuU,NAME_SEARCH,E0PQ", signals: { newRole: { months: 3 }, network: { degree: 2, count: 8 }, funding: null } },
-    { name: "Oleh Shkinder", title: "Senior Product Manager", company: "Binance.US", companyBlurb: "Recently changed roles", location: "Palo Alto, California, United States", connections: 7, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAACZOJlIBWXkifLLVOEVaz9Vobwo2GT4c0SU,NAME_SEARCH,grWO", signals: { newRole: { months: 3 }, network: { degree: 2, count: 7 }, funding: null } },
-    { name: "Frank Grottola", title: "Enterprise Sales Director", company: "Remedio (formerly GYTPOL)", companyBlurb: "Recently changed roles", location: "New York City Metropolitan Area", connections: 6, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAACIjYBaVK54ersfwbuFcZJpeuVbb3lqK8,NAME_SEARCH,xhVz", signals: { newRole: { months: 3 }, network: { degree: 2, count: 6 }, funding: null } },
-    { name: "Pamela DeLuca", title: "Chief Product Officer", company: "Axonify", companyBlurb: "Recently changed roles", location: "Boston, Massachusetts, United States", connections: 6, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAVoJrsBLo8BQVbZkdNqqHBx53e0SVTydXM,NAME_SEARCH,Xvwi", signals: { newRole: { months: 3 }, network: { degree: 2, count: 6 }, funding: null } },
-    { name: "Nathan Tailleur", title: "Senior Product Enablement Manager", company: "Jump - Advisor AI", companyBlurb: "Recently changed roles", location: "Draper, Utah, United States", connections: 6, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAACW_yXABOdV9jacoRfYWtRSoZNpe-zbwhyA,NAME_SEARCH,x3sp", signals: { newRole: { months: 3 }, network: { degree: 2, count: 6 }, funding: null } },
-    { name: "Priti Jagger", title: "Senior Product Manager", company: "GrowthZone AMS", companyBlurb: "Recently changed roles", location: "Atlanta Metropolitan Area", connections: 5, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAApK6sBOKURcQDR8qGfQWvae9T2Eq7zLOU,NAME_SEARCH,-GDh", signals: { newRole: { months: 3 }, network: { degree: 2, count: 5 }, funding: null } },
-    { name: "Jashyard Johnson", title: "Staff Product Manager", company: "DentalPlans.com", companyBlurb: "Recently changed roles", location: "Chandler, Arizona, United States", connections: 5, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABRunHYBkH2tWQyROx15nmbra8O6D4ciD3o,NAME_SEARCH,OlF2", signals: { newRole: { months: 3 }, network: { degree: 2, count: 5 }, funding: null } },
-    { name: "Jon Cunha", title: "Senior Product Manager", company: "KERV.ai", companyBlurb: "Recently changed roles", location: "United States", connections: 5, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALT9mYB4J82oSA2rpUOO0MTfkJnktVKsUw,NAME_SEARCH,3H8-", signals: { newRole: { months: 3 }, network: { degree: 2, count: 5 }, funding: null } },
-    { name: "Robbie Knutson-Ratto", title: "SVP Product", company: "Updater", companyBlurb: "Recently changed roles", location: "Lafayette, California, United States", connections: 4, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAbrvsBrum-oBSs3fPHfqm74ZuUeU_MOn8,NAME_SEARCH,SQqE", signals: { newRole: { months: 3 }, network: { degree: 2, count: 4 }, funding: null } },
-    { name: "Nitin T. Deshmukh", title: "Senior Product Manager", company: "Qase", companyBlurb: "Recently changed roles", location: "Dublin, County Dublin, Ireland", connections: 4, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAB8I8fkBxNv3XgiPc7e-5bdeHsR0j8zk9Lw,NAME_SEARCH,-zVg", signals: { newRole: { months: 3 }, network: { degree: 2, count: 4 }, funding: null } },
-    { name: "Greg Dale", title: "Director, Product", company: "Haus", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 4, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABYBsEBPCVVMjGhXKDlpKGBrzsn5239IuE,NAME_SEARCH,VZaZ", signals: { newRole: { months: 3 }, network: { degree: 2, count: 4 }, funding: null } },
-    { name: "Ran Liron", title: "Director of Product Design", company: "XM Cyber", companyBlurb: "Recently changed roles", location: "Petah Tikva, Center District, Israel", connections: 3, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABEpTIBEB3NsB2LymI4DVTfSPyG_IpTHgI,NAME_SEARCH,9T0a", signals: { newRole: { months: 3 }, network: { degree: 2, count: 3 }, funding: null } },
-    { name: "Dhanvardini Rajendran", title: "Product Manager - Vice President", company: "Aspiring Product Managers Club @ Northeastern University", companyBlurb: "Recently changed roles", location: "Boston, Massachusetts, United States", connections: 3, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAADc_W-wBQW7kzgTlXMc7VgekuYnNksrDfWk,NAME_SEARCH,clQ8", signals: { newRole: { months: 3 }, network: { degree: 2, count: 3 }, funding: null } },
-    { name: "Jonathan Gross, J.D., CIPP/US", title: "VP of Sales", company: "Lumenci", companyBlurb: "Recently changed roles", location: "Greater Houston", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAEUui8BmqLVsP9OWodAwi9DLK8dACkFG6I,NAME_SEARCH,sjNz", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Paolo Del Conte", title: "Senior Partner", company: "N2Growth", companyBlurb: "Recently changed roles", location: "Milan, Lombardy, Italy", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAYxtJMBRL-9fZG6mIEei516-ZAGaVTfY10,NAME_SEARCH,Lc64", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Ryan Lavelle", title: "Founder & CEO", company: "Mpowa", companyBlurb: "Recently changed roles", location: "United Kingdom", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAASV9cBPF7ifL-LUvSPBhYTFB24H0MP4ks,NAME_SEARCH,3rPJ", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Faseel Anwar", title: "AI Product Manager", company: "UniHawk Global", companyBlurb: "Recently changed roles", location: "Dubai, United Arab Emirates", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAA7l7V4Bc4GfrekIdNhNfAzkMbo5A7s78_Y,NAME_SEARCH,DRrQ", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Chris Finan", title: "Sr. Director, Partner Solutions Strategy", company: "KERV.ai", companyBlurb: "Recently changed roles", location: "Douglasville, Georgia, United States", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAnPpYBLdKhLZyMAD1Z_BFXUnqVCmv_pCw,NAME_SEARCH,VI_E", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "John Barrus", title: "VP of Product", company: "Niobium Microsystems", companyBlurb: "Recently changed roles", location: "Menlo Park, California, United States", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAC1i4BKW2FjBPDCkYGvgiuVR3p7mo7ilE,NAME_SEARCH,Su95", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Duncan McCreery", title: "VP Product", company: "Hostfully", companyBlurb: "Recently changed roles", location: "Atlanta, Georgia, United States", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAIP7_MB8rZLqFgAVfjVvmVZQy1NQtj0qEk,NAME_SEARCH,4ui8", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Laurie Davis", title: "Tech Lead, Clinical AI", company: "Ambience Healthcare", companyBlurb: "Recently changed roles", location: "West Palm Beach, Florida, United States", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAEBc9WEBQY4DM-wMJ9juXc--Ac6PDy8ErH0,NAME_SEARCH,teXP", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Sarah Celnik", title: "VP of Product", company: "360Learning", companyBlurb: "Recently changed roles", location: "Greater Paris Metropolitan Region", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAZVY2kB0mCRBZDD6QzKsqD7LrRDBXAxVy0,NAME_SEARCH,1KW1", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Charles Bennett", title: "Chief Product Officer", company: "TIS (Treasury Intelligence Solutions)", companyBlurb: "Recently changed roles", location: "United Kingdom", connections: 2, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAVufQBNRpdxCu3MOzcDTFsvtlmchjZ9fg,NAME_SEARCH,F4SV", signals: { newRole: { months: 3 }, network: { degree: 2, count: 2 }, funding: null } },
-    { name: "Wes Heiskell", title: "Well Construction and Intervention Director - North America", company: "Paradigm", companyBlurb: "Recently changed roles", location: "Greater Houston", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAQpmv4BUUDqrPROBqWFp3Sl5amw-SaWkE8,NAME_SEARCH,QjET", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Dr. Vitaly Berezka", title: "Hub Manager MENA", company: "WU Executive Academy", companyBlurb: "Recently changed roles", location: "Dubai, Dubai, United Arab Emirates", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAZI1mcBt87Un-F8RYVaHlirYVA1Wlp2kFU,NAME_SEARCH,uE5U", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Neil Graham", title: "Director of Brand UK & Europe", company: "REP Fitness", companyBlurb: "Recently changed roles", location: "Greater Nuremberg Metropolitan Area", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAOm98kB1hSMsvNBc1dVf1tC37TVmZlmHn8,NAME_SEARCH,NVlL", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Todd Brown", title: "Director of Product Management", company: "LGI Healthcare Solutions - USA", companyBlurb: "Recently changed roles", location: "Knoxville, Tennessee, United States", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABGURQB0EGDqNllP6-Ci7YZECKHDD4-YyY,NAME_SEARCH,TMrB", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Patrick Barrett", title: "Director - Platform Product Manager", company: "IEQ Capital", companyBlurb: "Recently changed roles", location: "Kennesaw, Georgia, United States", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABOk6GsBtwOaAXTbCNX02Er7ZSeQ41lI6b4,NAME_SEARCH,temd", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Shashank Goel", title: "Chief Product Officer", company: "Nexxa.ai", companyBlurb: "Recently changed roles", location: "San Francisco Bay Area", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAJHeQABqSgUWi5hykQtOiKRQj3N-q2ssmM,NAME_SEARCH,PvFf", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Trishul Patel", title: "Chief Product Officer", company: "Ember", companyBlurb: "Recently changed roles", location: "New York, New York, United States", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAFv1fcBr8cUWgGO8Vq7PbivJ7f4RcOJj_o,NAME_SEARCH,woiS", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Gobi Nadesh", title: "Product Manager", company: "Stealth FinTech Startup", companyBlurb: "Recently changed roles", location: "Toronto, Ontario, Canada", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAbOvAkBcpZY9Q4za7wFYJy-Hiu5_7rRHTg,NAME_SEARCH,O_In", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Greyson Jenista", title: "Senior Product Manager", company: "Stalker Radar", companyBlurb: "Recently changed roles", location: "Dallas-Fort Worth Metroplex", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABShLYsB6d_CVsg7gv8fcd9ezi8EC1rPh74,NAME_SEARCH,clPF", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Kim Garcia (Jurczak)", title: "Senior Product Manager", company: "Everyday Speech", companyBlurb: "Recently changed roles", location: "Miami-Fort Lauderdale Area", connections: 1, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABPJxUBe6rVcyGiUPrTaAjipuakWRSmBX8,NAME_SEARCH,4Unu", signals: { newRole: { months: 3 }, network: { degree: 2, count: 1 }, funding: null } },
-    { name: "Jeremy Hart", title: "Senior Solutions Architect - Ai", company: "NiCE Cognigy", companyBlurb: "Recently changed roles", location: "Dallas, Texas, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAaKcBUB5so9mb9H7TJYWiCEqgeiRP36vlA,NAME_SEARCH,6E6e", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Yashar Ahmadpour", title: "CX Program Advisory Board Member", company: "Customer Experience at UC Irvine", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAD1ib0BWd1jeJwPGccJMYQbYne_B6lnW2w,NAME_SEARCH,lzd5", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Michele LeBourdais SHRM-SCP, PHR, CCP, CBP", title: "Director of Human Resources", company: "Lush Lawn & Safari Tree", companyBlurb: "Recently changed roles", location: "Detroit Metropolitan Area", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAACPcdWcBLWRq8W_9DwDrnZ7rRZNU4Odf7So,NAME_SEARCH,Jzv8", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Dr. Mohamed Badr", title: "Senior Director - Healthcare Operations - GlobeMed Gulf", company: "GlobeMed Group", companyBlurb: "Recently changed roles", location: "Dubai, United Arab Emirates", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALh-n8BDRvrdL9emVMnE9wccEPvLo7WPis,NAME_SEARCH,SOIR", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Michael Sheinfeld", title: "Senior Director of Sales - Canada", company: "High Cliff Partners Inc.", companyBlurb: "Recently changed roles", location: "North York, Ontario, Canada", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAABMxdcBrJa-Fm5GNt12h90fd7Qj4xFvFGU,NAME_SEARCH,FyOx", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Mattia Ferrari", title: "Product Manager, Assistant Director", company: "MOH Office for Healthcare Transformation (MOHT)", companyBlurb: "Recently changed roles", location: "Singapore, Singapore", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAKQ-qsBtjWGra9dk_ZTcw16dVfJISsxNMU,NAME_SEARCH,xVW8", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Kazutaka Yoshinaga, MD", title: "Product Manager", company: "Pocketalk", companyBlurb: "Recently changed roles", location: "Tokyo, Japan", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAjQYtgBavPH3QmNqmYEwCZPI6AKrHpGVdI,NAME_SEARCH,GNSe", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Harshin Balaji", title: "Product Manager", company: "Atomicwork", companyBlurb: "Recently changed roles", location: "Bengaluru, Karnataka, India", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAChnZ4YBAUh4BEerq5vtmptXl57MdJTYeWM,NAME_SEARCH,chp2", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Mohammed Kabir", title: "Director of Product Development", company: "Universal Quality Solutions Inc", companyBlurb: "Recently changed roles", location: "Greater Chicago Area", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAL4p7sBFf4XgWpvYqVaxJ-aX-6IP7en3i8,NAME_SEARCH,-XEA", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Vinicius van Halst", title: "Senior Product Manager", company: "SeQura", companyBlurb: "Recently changed roles", location: "Barcelona, Catalonia, Spain", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAACA9PpwBP1a1XsiFYXwl7gIxG0Eyh6ClKT0,NAME_SEARCH,wYii", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Madhu Duriseti", title: "Product Manager", company: "Apple", companyBlurb: "Recently changed roles", location: "Santa Clara, California, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAALJ-4cBykERRx-UsSelwsliepTr9amFJnU,NAME_SEARCH,PfMp", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "FELIX WEHMEYER", title: "Senior Product Manager / Designer Menswear", company: "DRYKORN Modevertriebs GmbH & Co. KG", companyBlurb: "Recently changed roles", location: "Würzburg, Bavaria, Germany", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAB3qN-kBzLXs3JmanoNoJwhVgqHn55Q4kOQ,NAME_SEARCH,mRPF", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Ignasi Capell Grau", title: "Senior Product Manager", company: "Clarity AI", companyBlurb: "Recently changed roles", location: "Barcelona, Catalonia, Spain", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAACB0s7QBJkHjm435jaZGv59cMevzwaqhtH4,NAME_SEARCH,4PZI", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Steve Laret", title: "Senior Product Manager", company: "Hexure", companyBlurb: "Recently changed roles", location: "Santa Clarita, California, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAFitAFMB2sjSQ29GNsU53wmWDIsHli4LBIA,NAME_SEARCH,3ACA", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Juan Miguel García", title: "Product Manager en Cloud", company: "novanotio", companyBlurb: "Recently changed roles", location: "Alcalá de Henares, Spain", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAADY5xAABFxI2ZLlmj-nKioTJPTuFZJlIh9k,NAME_SEARCH,8S1c", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Michele Schembri", title: "VP of Product", company: "Game Lounge", companyBlurb: "Recently changed roles", location: "Saint Julian's, Malta", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABa6OxIBMrqOqTB-cCAjoNm2J2FpmNio1PE,NAME_SEARCH,G_vZ", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Shreyansh Srivastava", title: "Product Manager", company: "LeanData", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAABUGoYMBgW9Hrdf3U_sqooBN0vQ4BS1I1GE,NAME_SEARCH,kDTP", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Rene Kim", title: "SVP-Product Delivery", company: "DriveWealth", companyBlurb: "Recently changed roles", location: "New York, New York, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAAAO02wB6kwwLirJCvH8SW3SdGjVXfs5qhc,NAME_SEARCH,pUMu", signals: { newRole: { months: 3 }, network: null, funding: null } },
-    { name: "Ruben Luthra", title: "Agent Product Manager", company: "Decagon", companyBlurb: "Recently changed roles", location: "San Francisco, California, United States", connections: 0, roleMonths: 3, linkedin: "https://www.linkedin.com/sales/lead/ACwAAC6L8KwBdrZ8UNGZ3HQz3HVcHe-p32FzTFs,NAME_SEARCH,Af4G", signals: { newRole: { months: 3 }, network: null, funding: null } },
-];
+const prospects = 
+[
+  {
+    "name": "Kevin Young",
+    "title": "Chief Marketing Officer and EVP Growth",
+    "company": "ToolsGroup",
+    "companyBlurb": "ToolsGroup is a Boston-based software company founded in 1993, specializing in A",
+    "location": "Havertown, Pennsylvania",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/kevin-young-34b2488",
+    "email": "kyoung@toolsgroup.com",
+    "employeeCount": 320,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Ashleigh Shapiro",
+    "title": "VP of Growth (Head of Growth)",
+    "company": "Code3",
+    "companyBlurb": "Code3 is a full-service digital marketing agency based in New York City, employi",
+    "location": "Denver, Colorado",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/ashleigh-shapiro",
+    "email": "ashleigh.s@code3.com",
+    "employeeCount": 220,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jason Kellerman",
+    "title": "Chief Product Officer and Chief Growth Officer",
+    "company": "Academia.edu",
+    "companyBlurb": "Academia.edu is a San Francisco-based social network and open-access platform fo",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jason-kellerman-9b4285",
+    "email": null,
+    "employeeCount": 350,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Laurel Rossi",
+    "title": "Chief Growth Officer and Chief Marketing Officer",
+    "company": "Infillion",
+    "companyBlurb": "Infillion is a digital advertising and marketing technology company based in Los",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/laurelrossi",
+    "email": "laurel.rossi@infillion.com",
+    "employeeCount": 190,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Dave Sampson",
+    "title": "Chief Growth Officer and CMO",
+    "company": "iVisa",
+    "companyBlurb": "iVisa is a Madrid-based company founded in 2012 or 2013 that specializes in onli",
+    "location": "Seattle, Washington",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/sampsondave",
+    "email": "dave.sampson@ivisa.com",
+    "employeeCount": 420,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Samantha Tortora",
+    "title": "Chief Growth Officer & Chief Marketing Officer",
+    "company": "Nasdaq Private Market",
+    "companyBlurb": "Nasdaq Private Market (NPM) is an independent company that provides a secondary ",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/samantha-tortora-9612bba8",
+    "email": null,
+    "employeeCount": 90,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Gavin Leung",
+    "title": "Fractional CMO / VP of Growth / Consultant",
+    "company": "WorldWinner",
+    "companyBlurb": "WorldWinner is a prominent online platform established in 1999, specializing in ",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/gavin-leung",
+    "email": null,
+    "employeeCount": 70,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Juliana Daele",
+    "title": "VP, Head of Growth & Product Marketing",
+    "company": "CertifyOS",
+    "companyBlurb": "CertifyOS is a healthcare technology company founded in 2021, based in New York,",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/julianavandaele",
+    "email": "juliana@certifyos.com",
+    "employeeCount": 290,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Shan Zhong",
+    "title": "Head of Product and Growth, Director",
+    "company": "NewsBreak",
+    "companyBlurb": "NewsBreak is a leading local news platform and mobile app that connects millions",
+    "location": "San Jose, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/shanzh",
+    "email": "shan.zhong@newsbreak.com",
+    "employeeCount": 330,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Fitch Carrere",
+    "title": "Chief Marketing Officer & Head of Product",
+    "company": "Choice by KT",
+    "companyBlurb": "Choice by KT is a retirement investment platform designed to simplify retirement",
+    "location": "Atlanta, Georgia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/fitch-carrere-9934712a",
+    "email": "fcarrere@kingdomtrust.com",
+    "employeeCount": 27,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Nick Topping",
+    "title": "Head of Growth | CGO | Driving Growth in SaaS | 3X Cmo/cro & VP of Marketing",
+    "company": "Vivantio",
+    "companyBlurb": "Vivantio is a SaaS provider of service management software, established in 2003.",
+    "location": "Lenexa, Kansas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/nicktopping",
+    "email": "nick.topping@vivantio.com",
+    "employeeCount": 30,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Zachary Rustad",
+    "title": "Chief Marketing Officer / Chief Product Officer",
+    "company": "Nanonation",
+    "companyBlurb": "Nanonation is a digital signage and interactive solutions company based in Linco",
+    "location": "Lincoln, Nebraska",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/zachary-rustad-b5a0599",
+    "email": "zachary.rustad@nanonation.net",
+    "employeeCount": 42,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Terry Belzer",
+    "title": "Chief Marketing Officer/Chief Product Officer",
+    "company": "S-One Holdings Corporation",
+    "companyBlurb": "S-One Holdings Corporation is a global holding company based in Sarasota, Florid",
+    "location": "Sarasota, Florida",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/terrylynnbelzer",
+    "email": "terrylynn.belzer@sone.com",
+    "employeeCount": 160,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Thomas Shin",
+    "title": "Chief Growth Officer (cmo+cro)",
+    "company": "Elfster",
+    "companyBlurb": "Elfster is a digital platform that specializes in gift exchanges, wish lists, an",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/thomasshin",
+    "email": "toms@elfster.com",
+    "employeeCount": 37,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Eric Weiss",
+    "title": "CMO - Director of Strategic Growth",
+    "company": "BetterDemon",
+    "companyBlurb": "BetterDemon is an independent game development studio based in San Francisco, wi",
+    "location": "Saint Clair Shores, Michigan",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/ericjeanweiss",
+    "email": "eric@betterdemon.com",
+    "employeeCount": 25,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Ryan Berejikian",
+    "title": "Head of Growth / Senior Director of Growth",
+    "company": "GOPURE",
+    "companyBlurb": "goPure Beauty is a clean-beauty skincare company founded by Alex and Erin, focus",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/ryan-berejikian",
+    "email": "ryan.berejikian@gopurebeauty.com",
+    "employeeCount": 55,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Deepak Ghosh",
+    "title": "Vice President/Head of Product & Growth",
+    "company": "Abra",
+    "companyBlurb": "Abra is a global digital asset prime services and wealth management company that",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/deepakkghosh",
+    "email": "deepak@abra.com",
+    "employeeCount": 180,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Suzanne Wogelius",
+    "title": "Vice President, Head of Product & Growth",
+    "company": "Hyphen",
+    "companyBlurb": "Hyphen is a healthcare technology company that enables health plans, providers, ",
+    "location": "Farmington, Connecticut",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/suzanne-wogelius-mba-1108662",
+    "email": "swogelius@hyphencare.com",
+    "employeeCount": 55,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Bart Waldeck",
+    "title": "Chief Marketing Officer & Senior VP, Product Strategy",
+    "company": "Tango",
+    "companyBlurb": "Tango Analytics, LLC is a Dallas-based company founded in 2008, specializing in ",
+    "location": "Chicago, Illinois",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/bartwaldeck",
+    "email": "bart.waldeck@tangoanalytics.com",
+    "employeeCount": 300,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Stephen Chang",
+    "title": "Head of Growth; SVP Marketing",
+    "company": "Fifteenth",
+    "companyBlurb": "Fifteenth is an AI-powered tax planning and filing platform tailored for profess",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/stephenchang888",
+    "email": null,
+    "employeeCount": 28,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Chris Thorne",
+    "title": "Chief Marketing Officer & Head of Product (Apple)",
+    "company": "Beats by Dre",
+    "companyBlurb": "Beats by Dre is a premium audio brand founded in 2006 by Dr. Dre and Jimmy Iovin",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/christhorne44",
+    "email": null,
+    "employeeCount": 500,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Stephen Soroosh",
+    "title": "Chief Product Officer | Head of Product",
+    "company": "L-Charge",
+    "companyBlurb": "L-Charge is a London-based company founded in 2020 that specializes in off-grid,",
+    "location": "Lewisville, North Carolina",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/stephensoroosh",
+    "email": "s.soroosh@l-charge.net",
+    "employeeCount": 28,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jose Ponte",
+    "title": "President, Chief Growth Officer",
+    "company": "Stellar Development Foundation",
+    "companyBlurb": "The Stellar Development Foundation (SDF) is a nonprofit organization based in Sa",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jose-fernandez-da-ponte-a46ba81",
+    "email": "jose.daponte@stellar.org",
+    "employeeCount": 270,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Todd Ballard",
+    "title": "President & Chief Growth Officer",
+    "company": "ALT Sports Data",
+    "companyBlurb": "ALT Sports Data is a San Diego-based startup founded in 2021 that specializes in",
+    "location": "Carlsbad, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/nxttodd",
+    "email": "tb@altsportsdata.com",
+    "employeeCount": 35,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Tony Boselli",
+    "title": "President & Chief Growth Officer",
+    "company": "all.health",
+    "companyBlurb": "all.health is a healthcare technology company that offers an Integrated Continuo",
+    "location": "Ponte Vedra Beach, Florida",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/tony-boselli-00a4829",
+    "email": "t@all.health",
+    "employeeCount": 64,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Aubrey White",
+    "title": "President & Chief Growth Officer",
+    "company": "Modern Classrooms Project",
+    "companyBlurb": "The Modern Classrooms Project (MCP) is a nonprofit organization established in 2",
+    "location": "Philadelphia, Pennsylvania",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/aubreyleighwhite",
+    "email": "aubrey.white@modernclassrooms.org",
+    "employeeCount": 190,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Kent Panther",
+    "title": "President & Chief Growth Officer",
+    "company": "Wray Ward",
+    "companyBlurb": "Wray Ward is an independent, full-service marketing communications and advertisi",
+    "location": "Charlotte, North Carolina",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/kentpanther",
+    "email": "kpanther@wrayward.com",
+    "employeeCount": 140,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jennifer Wills",
+    "title": "President & Chief Growth Officer",
+    "company": "Kelleher International",
+    "companyBlurb": "Kelleher International is a premier global matchmaking service founded in 1986 b",
+    "location": "Mill Valley, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jennifer-b-wills-26304637",
+    "email": "jen@kelleher-international.com",
+    "employeeCount": 63,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Nate Copeland",
+    "title": "President & Chief Growth Officer",
+    "company": "Xcellent Technology Solutions (XTS)",
+    "companyBlurb": "Xcellent Technology Solutions, Inc. (XTS) is a Service Disabled Veteran-Owned Sm",
+    "location": "Baltimore, Maryland",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/nate-copeland-4368943",
+    "email": "nate.copeland@xts-inc.com",
+    "employeeCount": 96,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Lee Resnick",
+    "title": "President / Chief Growth Officer",
+    "company": "WellStreet Urgent Care",
+    "companyBlurb": "WellStreet Urgent Care is a healthcare management company that develops and oper",
+    "location": "Atlanta, Georgia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/lee-resnick-md-35192736",
+    "email": "lresnick@wellstreet.com",
+    "employeeCount": 310,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "John Clayton",
+    "title": "Chief Growth Officer, President",
+    "company": "Three Ships",
+    "companyBlurb": "Three Ships is a digital marketing and consumer media company based in Raleigh, ",
+    "location": "Atlanta, Georgia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/johnclayton",
+    "email": "john@three-ships.com",
+    "employeeCount": 72,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Ben Masino",
+    "title": "President, Chief Growth Officer",
+    "company": "Avertium",
+    "companyBlurb": "Avertium is a cybersecurity service provider based in Knoxville, Tennessee, spec",
+    "location": "Philadelphia, Pennsylvania",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/ben-masino-bb19b816",
+    "email": "ben.masino@avertium.com",
+    "employeeCount": 250,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Fiaz Mohamed",
+    "title": "President and Chief Growth Officer",
+    "company": "Bright Machines",
+    "companyBlurb": "Bright Machines is a San Francisco-based company founded in 2018 that focuses on",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/fiazm",
+    "email": "fiaz.mohamed@brightmachines.com",
+    "employeeCount": 250,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Robyn Freye",
+    "title": "President & Chief Growth Officer",
+    "company": "CourtAvenue",
+    "companyBlurb": "CourtAvenue is a growth partner focused on digital transformation, strategy, exp",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/robynfreye",
+    "email": "robyn.freye@courtavenue.com",
+    "employeeCount": 96,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Brian Dacy",
+    "title": "President & Chief Growth Officer",
+    "company": "Respire Homecare Services",
+    "companyBlurb": "Respire Homecare is a prominent provider of at-home respiratory care services, e",
+    "location": "Chicago, Illinois",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/brian-dacy-b71a545",
+    "email": "bdacy@lifetechcare.com",
+    "employeeCount": 89,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Vijay Bachani",
+    "title": "President & Chief Growth Officer",
+    "company": "New York Bariatric Group",
+    "companyBlurb": "New York Bariatric Group (NYBG) is a leading bariatric practice and the largest ",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/vijay-bachani-cfa-64982a",
+    "email": "vbachani@nybg.com",
+    "employeeCount": 160,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Mike Kuhn",
+    "title": "President & Chief Growth Officer",
+    "company": "Mohawk Global",
+    "companyBlurb": "Mohawk Global is a family-owned provider of supply chain solutions and trade exp",
+    "location": "Cazenovia, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/mikekuhn1",
+    "email": "mkuhn@mohawkglobal.com",
+    "employeeCount": 360,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Roy Kim",
+    "title": "President & Chief Growth Officer",
+    "company": "Cardiac Insight, Inc.",
+    "companyBlurb": "Cardiac Insight, Inc. is a medical device company based in Bellevue, Washington.",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/roy-kim-b187b1132",
+    "email": "rkim@cardiacinsightinc.com",
+    "employeeCount": 46,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Joe Eberly",
+    "title": "President & Chief Growth Officer",
+    "company": "4M Analytics",
+    "companyBlurb": "4M Analytics is a subsurface utility mapping and analytics company based in Aust",
+    "location": "Denver, Colorado",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/joeeberly",
+    "email": "joe@4m-a.com",
+    "employeeCount": 150,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Dara Wheeler",
+    "title": "Chief Marketing Officer and EVP of Product Strategy and Innovation",
+    "company": "Axiom Medical",
+    "companyBlurb": "Axiom Medical Consulting, LLC is a Texas-based provider of occupational health s",
+    "location": "Spring, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/dara-wheeler",
+    "email": "dara.wheeler@axiomllc.com",
+    "employeeCount": 290,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "James Thompson",
+    "title": "President and CGO",
+    "company": "Knexus",
+    "companyBlurb": "Knexus, also known as Knexus Research Corporation or Knexus Research LLC, is a p",
+    "location": "Fort Worth, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jamesethompson",
+    "email": null,
+    "employeeCount": 33,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Greg Ezzell",
+    "title": "President and Chief Growth Officer",
+    "company": "TransTech Group",
+    "companyBlurb": "TransTech Group is a provider of custom-engineered equipment and services, focus",
+    "location": "Wilmington, North Carolina",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/greg-ezzell-0413788",
+    "email": "gezzell@transtechgroup.com",
+    "employeeCount": 130,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Amgad Sami",
+    "title": "VP of Product (Head of Product)",
+    "company": "EMARKETER",
+    "companyBlurb": "EMARKETER is a subscription-based market research company that provides forecast",
+    "location": "Larchmont, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/amgadsami",
+    "email": "asami@emarketer.com",
+    "employeeCount": 340,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Mandy Howard",
+    "title": "VP of Product (Head of Product)",
+    "company": "Zuub",
+    "companyBlurb": "Zuub is a Santa Monica-based company founded in 2017 that specializes in AI-powe",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/mandyhoward",
+    "email": "mandy@zuub.com",
+    "employeeCount": 39,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Brian Crawford",
+    "title": "President and Chief Growth Officer",
+    "company": "P&A Group, Inc.",
+    "companyBlurb": "P&A Group, Inc., also known as P&A Group or Priselac & Associates, is a national",
+    "location": "Chicago, Illinois",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/brian-crawford-23712316",
+    "email": "crawfordb@padmin.com",
+    "employeeCount": 170,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Michael Wells",
+    "title": "President and Chief Growth Officer",
+    "company": "Tangible Security",
+    "companyBlurb": "Tangible Security is a cybersecurity firm based in Knightdale, North Carolina, w",
+    "location": "Baltimore, Maryland",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/michael-wells-70b60711b",
+    "email": null,
+    "employeeCount": 35,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jason Lisovicz",
+    "title": "President & Chief Growth Officer",
+    "company": "Altus Community Healthcare",
+    "companyBlurb": "Altus Community Healthcare is the largest provider of emergency care in Texas, o",
+    "location": "Houston, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jlisovicz",
+    "email": null,
+    "employeeCount": 45,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Derek Medlin",
+    "title": "President & Chief Growth Officer",
+    "company": "Katapult",
+    "companyBlurb": "Katapult is a financial technology company based in New York, specializing in le",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/derekmedlin",
+    "email": null,
+    "employeeCount": 94,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Mack Wallace",
+    "title": "VP, Product (Head of Product)",
+    "company": "MPOWER Financing",
+    "companyBlurb": "MPOWER Financing is a Public Benefit Corporation based in Washington, D.C., foun",
+    "location": "Washington, District of Columbia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/smackenziewallace",
+    "email": null,
+    "employeeCount": 340,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Yi Jin",
+    "title": "Vice President of Growth and Product Marketing",
+    "company": "Turing AI",
+    "companyBlurb": "Turing AI is a company dedicated to enhancing safety, security, and operations t",
+    "location": "San Mateo, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/yijin",
+    "email": "yi@turingvideo.com",
+    "employeeCount": 99,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Tom Sullivan",
+    "title": "VP of Growth (Marketing & Product)",
+    "company": "Laps",
+    "companyBlurb": "Laps is a recommerce platform network that connects sports enthusiasts to buy, s",
+    "location": "Seattle, Washington",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/sullitb",
+    "email": "tsullivan@laps.com",
+    "employeeCount": 130,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Menghan Li",
+    "title": "VP of Growth, Product & Marketing",
+    "company": "Jerry",
+    "companyBlurb": "Jerry is a technology platform based in Palo Alto, California, that simplifies c",
+    "location": "Redwood City, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/menghan-li",
+    "email": "menghan.li@getjerry.com",
+    "employeeCount": 370,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Paul Adams",
+    "title": "Head of Growth, President",
+    "company": "AlterMe",
+    "companyBlurb": "AlterMe is a personalized fitness and wellness platform that utilizes DNA testin",
+    "location": "Provo, Utah",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/paulspikeadams",
+    "email": "padams@alterme.com",
+    "employeeCount": 91,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Tariq Ali",
+    "title": "VP Marketing/CMO",
+    "company": "Clearoute",
+    "companyBlurb": "Clearoute Inc. is a full-service consulting and marketing agency located in Toro",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/tariqali",
+    "email": "tariq@clearoute.com",
+    "employeeCount": 49,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Anna Tou",
+    "title": "VP Marketing, CMO",
+    "company": "Life Alive Café",
+    "companyBlurb": "Life Alive Organic Café is a fast-casual vegetarian restaurant chain founded in ",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/anna-tou-4085965",
+    "email": "anna@lifealive.com",
+    "employeeCount": 99,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Michael Koehn",
+    "title": "CMO VP Marketing",
+    "company": "Lambert Vet Supply",
+    "companyBlurb": "Lambert Vet Supply is a wholesale distributor and e-commerce retailer of veterin",
+    "location": "Elmwood, Nebraska",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/mikekoehn",
+    "email": "mike.koehn@lambertvetsupply.com",
+    "employeeCount": 73,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Michael Ackerman",
+    "title": "VP of Marketing and Chief Marketing Officer",
+    "company": "Norwood Portable Sawmills",
+    "companyBlurb": "Norwood Portable Sawmills, also known as Norwood Sawmills or Norwood Industries ",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/mackerman",
+    "email": null,
+    "employeeCount": 51,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Franz Bdoyan",
+    "title": "Director of Product (Head of Product)",
+    "company": "GoodShip",
+    "companyBlurb": "GoodShip is a Tennessee-based software company founded in 2022, offering an AI-p",
+    "location": "Seattle, Washington",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/franzbdoyan",
+    "email": "franz@goodship.io",
+    "employeeCount": 60,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Hala Ali",
+    "title": "Head (VP) of Marketing & Growth",
+    "company": "Oxygen",
+    "companyBlurb": "Oxygen is a fintech company founded in 2018 by Hussein Ahmed, operating as a neo",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/hala-ali-nj",
+    "email": "h.ali@getoxygen.com",
+    "employeeCount": 170,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Rebecca Harris",
+    "title": "VP, Growth Marketing & Product",
+    "company": "Experience.com",
+    "companyBlurb": "Experience.com is a software company based in San Ramon, California, founded in ",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/rebecca-ann-harris",
+    "email": null,
+    "employeeCount": 280,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Raymond Dooley",
+    "title": "VP Marketing & CMO",
+    "company": "GLAAD",
+    "companyBlurb": "GLAAD is a non-profit organization founded in 1985 that advocates for fair and i",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/raymondvdooley",
+    "email": null,
+    "employeeCount": 74,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "PK Sridhar",
+    "title": "Chief Product Officer - Head of Product and Operations",
+    "company": "Trust Your Supplier (TYS)",
+    "companyBlurb": "Trust Your Supplier (TYS) is a blockchain-based supplier management platform loc",
+    "location": "Morrisville, North Carolina",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/pksridhar",
+    "email": "pk.sridhar@trustyoursupplier.com",
+    "employeeCount": 26,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Kirk Thompson",
+    "title": "Partner and Fractional CMO / CXO / Chief Growth Officer",
+    "company": "Chief Outsiders",
+    "companyBlurb": "Chief Outsiders is a leading Executives-as-a-Service firm based in Houston, Texa",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/kirkthompson310",
+    "email": "kthompson@chiefoutsiders.com",
+    "employeeCount": 170,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Meshach Cisero",
+    "title": "Head/Director of Growth Marketing",
+    "company": "SpecterOps",
+    "companyBlurb": "SpecterOps is a cybersecurity company based in Alexandria, Virginia, founded in ",
+    "location": "Washington, District of Columbia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/meshach-cisero",
+    "email": "mcisero@specterops.io",
+    "employeeCount": 240,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Luke Cheng",
+    "title": "Director & Head of Growth",
+    "company": "Sunday",
+    "companyBlurb": "Sunday is a Boulder, Colorado-based company founded in 2017 that specializes in ",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/lukeicheng",
+    "email": "luke@getsunday.com",
+    "employeeCount": 120,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Harmony Anderson",
+    "title": "VP, Head of Growth & Marketing",
+    "company": "Superhuman Mail",
+    "companyBlurb": "Superhuman, also known as Superhuman Mail, is an AI-powered email client and pro",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/harmony-hickman-anderson",
+    "email": "harmony@superhuman.com",
+    "employeeCount": 160,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Steve Shue",
+    "title": "Vice President, Product and Growth Marketing",
+    "company": "Leoforce",
+    "companyBlurb": "Leoforce is a HR technology company founded in 2012 or 2013 by Madhu Modugu, who",
+    "location": "Minneapolis, Minnesota",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/stevejts",
+    "email": "steve.tieshue@leoforce.com",
+    "employeeCount": 270,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jamie Duklas",
+    "title": "Chief Growth Officer: Marketing & Sales",
+    "company": "Hundred Acre",
+    "companyBlurb": "",
+    "location": "Milwaukee, Wisconsin",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jamieduklas",
+    "email": "jamie@hundred-acre.org",
+    "employeeCount": 30,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Wayne Liu",
+    "title": "VP of Engineering, Co-Founder",
+    "company": "Transwarp",
+    "companyBlurb": "Transwarp Technology (Shanghai) Co., Ltd. is a prominent Chinese provider of ent",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/wayneliu88",
+    "email": "wayne.liu@transwarp.io",
+    "employeeCount": 1200,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Alberto Constans",
+    "title": "Chief Growth Officer and President Americas",
+    "company": "Exoticca",
+    "companyBlurb": "Exoticca is a Barcelona-based online travel agency founded in 2013 by Jesús Rodr",
+    "location": "Houston, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/constans",
+    "email": "alberto.constans@exoticca.com",
+    "employeeCount": 490,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Mary Buhay",
+    "title": "Chief Growth Officer and Head of Council",
+    "company": "Ragan Communications and PR Daily",
+    "companyBlurb": "Ragan Communications and PR Daily is a Chicago-based publishing and learning dev",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/marybuhay",
+    "email": "maryb@ragan.com",
+    "employeeCount": 120,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Katlin Arps",
+    "title": "Vice President, Growth & Product",
+    "company": "Brightidea",
+    "companyBlurb": "Brightidea is a software company based in San Francisco, founded in 1999. It spe",
+    "location": "Portland, Oregon",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/katlinmcnallyarps",
+    "email": "karps@brightidea.com",
+    "employeeCount": 60,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "John Canne",
+    "title": "President of Restoration and Chief Growth Officer",
+    "company": "Merjent",
+    "companyBlurb": "Merjent is an environmental consulting, engineering, and restoration services fi",
+    "location": "Merrill, Wisconsin",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/john-canne-74653a39",
+    "email": "john.canne@merjent.com",
+    "employeeCount": 250,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Michele Leung",
+    "title": "Vice President, Product & Growth Marketing",
+    "company": "Contrast Security",
+    "companyBlurb": "Contrast Security is an application security company founded in 2014 and headqua",
+    "location": "Seattle, Washington",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/michele-leung",
+    "email": "michele.leung@contrastsecurity.com",
+    "employeeCount": 230,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Vincena Allen",
+    "title": "Chief Growth Officer & Vice President",
+    "company": "The SEED Foundation",
+    "companyBlurb": "The SEED Foundation is a nonprofit organization established in 1997 by Eric Adle",
+    "location": "Washington, District of Columbia",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/vincena-allen-1468784b",
+    "email": "vincena@seedfoundation.com",
+    "employeeCount": 270,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Cassie Ccc",
+    "title": "VP/ Chief Growth Officer",
+    "company": "White River Valley Electric Cooperative, Inc.",
+    "companyBlurb": "White River Valley Electric Cooperative, Inc. (WRVEC) is a not-for-profit, membe",
+    "location": "Branson, Missouri",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/cassie-cunningham-ccc",
+    "email": "ccunningham@whiteriver.org",
+    "employeeCount": 61,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Cade Thompson",
+    "title": "Co-President & Chief Growth Officer",
+    "company": "Rocktop Technologies",
+    "companyBlurb": "Rocktop Technologies is a financial technology company based in Irving, Texas, f",
+    "location": "Plano, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/cade-thompson",
+    "email": "cthompson@rocktoptech.com",
+    "employeeCount": 95,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jacob Dempsey",
+    "title": "VP, Product & Growth Marketing",
+    "company": "Bilt",
+    "companyBlurb": "Bilt is a fintech payments and rewards platform based in New York, founded in 20",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jacobsdempsey",
+    "email": "jacob@biltrewards.com",
+    "employeeCount": 330,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jordan Nolff",
+    "title": "VP, Growth & Product",
+    "company": "Productboard",
+    "companyBlurb": "Productboard is a product management platform founded in 2014 by Hubert Palan an",
+    "location": "",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jordan-nolff-1699a029",
+    "email": "jordan.nolff@productboard.com",
+    "employeeCount": 400,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jim Chambers",
+    "title": "VP Growth & Product",
+    "company": "Movano Health",
+    "companyBlurb": "Movano Health is a health-focused technology company based in Pleasanton, Califo",
+    "location": "Chester, New Jersey",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jim-chambers-21124259",
+    "email": "jchambers@movano.com",
+    "employeeCount": 32,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Tara Connolly",
+    "title": "Vice President & Chief Growth Officer",
+    "company": "VIA Health Partners",
+    "companyBlurb": "VIA Health Partners is a nonprofit organization that has been providing hospice ",
+    "location": "Charlotte, North Carolina",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/taraconnolly2",
+    "email": "connollyt@viahp.org",
+    "employeeCount": 480,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Lori Simmons",
+    "title": "Vice President and Chief Growth Officer",
+    "company": "Armed Forces Insurance",
+    "companyBlurb": "Armed Forces Insurance (AFI) is a reciprocal insurance exchange established in 1",
+    "location": "Leavenworth, Kansas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/lori-simmons-7685801",
+    "email": "lori.simmons@afi.org",
+    "employeeCount": 110,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Kathleen Rankin",
+    "title": "Vice President & Chief Growth Officer",
+    "company": "The International Society of Arthroscopy, Knee Surgery and Orthopaedic Sports Medicine (ISAKOS)",
+    "companyBlurb": "The International Society of Arthroscopy, Knee Surgery and Orthopaedic Sports Me",
+    "location": "Pleasanton, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/kathleen-rankin-9112a15",
+    "email": "kathleen@isakos.com",
+    "employeeCount": 80,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jerod Laughlin",
+    "title": "Senior Vice President of Growth, Head of Marketing",
+    "company": "Premier Lacrosse League",
+    "companyBlurb": "The Premier Lacrosse League (PLL) is a men's professional field lacrosse league ",
+    "location": "Houston, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jlaughlin",
+    "email": "jlaughlin@premierlacrosseleague.com",
+    "employeeCount": 420,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Angela Walker",
+    "title": "Strategic Account Director",
+    "company": "Crafty",
+    "companyBlurb": "Crafty is a Chicago-based company founded in 2015 that specializes in managing o",
+    "location": "Chicago, Illinois",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/anwalker",
+    "email": "angela.walker@craftydelivers.com",
+    "employeeCount": 250,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Francesco Ruffo",
+    "title": "Senior Vice President Brand, Innovation & Growth Marketing (CMO)",
+    "company": "DYPER",
+    "companyBlurb": "DYPER is a sustainable diaper company founded in 2014 and based in Scottsdale, A",
+    "location": "Scottsdale, Arizona",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/francescopaoloruffo",
+    "email": "francesco@dyper.com",
+    "employeeCount": 31,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Albert Morabito",
+    "title": "Vice President, Head of Growth Marketing",
+    "company": "Raymond James Investment Management",
+    "companyBlurb": "Raymond James Investment Management is a global asset-management company and a d",
+    "location": "Saint Petersburg, Florida",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/albert-morabito-39a6579a",
+    "email": null,
+    "employeeCount": 190,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Alex Bunn",
+    "title": "Chief Marketing Officer, Head of Brand Strategy & Growth",
+    "company": "Breckenridge-Wynkoop Restaurant Group",
+    "companyBlurb": "Breckenridge-Wynkoop, LLC is a Denver-based restaurant group forged in 2010 by t",
+    "location": "Denver, Colorado",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/alexandrabunn",
+    "email": "abunn@breckenridge-wynkoop.com",
+    "employeeCount": 25,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Ray Gomez",
+    "title": "Vice President - Chief Growth Officer",
+    "company": "Trinity Hospice",
+    "companyBlurb": "Trinity Hospice is a full-service hospice agency dedicated to providing compassi",
+    "location": "Boerne, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/ray-gomez-a84b6450",
+    "email": null,
+    "employeeCount": 240,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Troy Gorczyca",
+    "title": "Cmo/svp Marketing",
+    "company": "Casa Lumbre",
+    "companyBlurb": "Casa Lumbre is a Mexico-based spirits company founded in 2016, focused on creati",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/troy-gorczyca-2ab0033",
+    "email": "t.gorczyca@casalumbre.com",
+    "employeeCount": 170,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Matt Simon",
+    "title": "CMO, Executive Vice President of Marketing",
+    "company": "Wills Group",
+    "companyBlurb": "Wills Group is a family-owned convenience and foodservice company based in La Pl",
+    "location": "Harrisburg, Pennsylvania",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/mattsimoncmo",
+    "email": "msimon@willsgroup.com",
+    "employeeCount": 260,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Tony Burquez",
+    "title": "VP, Growth Marketing",
+    "company": "ArmorCode Inc.",
+    "companyBlurb": "ArmorCode Inc. is a cybersecurity company based in Palo Alto, California, founde",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/tonyburquez",
+    "email": "tburquez@armorcode.io",
+    "employeeCount": 210,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jennifer Knutel",
+    "title": "Vice President of Growth Marketing",
+    "company": "meshIQ",
+    "companyBlurb": "meshIQ is a technology company based in Plainview, New York, that specializes in",
+    "location": "Boston, Massachusetts",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jenniferknutel",
+    "email": "jknutel@meshiq.com",
+    "employeeCount": 64,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Nick Churcher",
+    "title": "VP Growth & Marketing",
+    "company": "Scribe",
+    "companyBlurb": "Scribe is a workflow AI platform that automates the creation of visual step-by-s",
+    "location": "San Francisco, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/nickchurcher",
+    "email": "nick@scribehow.com",
+    "employeeCount": 310,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Rachel Bryant",
+    "title": "SVP Marketing | CMO",
+    "company": "Actionstep",
+    "companyBlurb": "Actionstep is a cloud-based legal practice management software platform designed",
+    "location": "Kalamazoo, Michigan",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/rachelabryant",
+    "email": "rachel.bryant@actionstep.com",
+    "employeeCount": 210,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Chris Crompton",
+    "title": "VP of Growth/Marketing",
+    "company": "CollX",
+    "companyBlurb": "CollX is a technology-driven mobile app and online marketplace founded in 2021 a",
+    "location": "Philadelphia, Pennsylvania",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/chris-t-crompton",
+    "email": "chris@collx.app",
+    "employeeCount": 26,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Jeff Ni",
+    "title": "Head of (VP) Growth Marketing & Operations",
+    "company": "Vyond",
+    "companyBlurb": "Vyond is a cloud-based video creation platform founded in 2007 and headquartered",
+    "location": "Los Angeles, California",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/jeffni",
+    "email": null,
+    "employeeCount": 270,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Drew Sing",
+    "title": "Head of Growth Product",
+    "company": "Clerk.com",
+    "companyBlurb": "Clerk is a developer-focused authentication and user management platform founded",
+    "location": "Seattle, Washington",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/drewsing",
+    "email": "drew.sing@clerk.dev",
+    "employeeCount": 200,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Chris Padilla",
+    "title": "VP Growth Marketing",
+    "company": "Philo",
+    "companyBlurb": "Philo is a streaming TV service based in San Francisco, founded in 2011. It offe",
+    "location": "New York, New York",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/cpadilla",
+    "email": "chris.padilla@philo.com",
+    "employeeCount": 210,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  },
+  {
+    "name": "Rajesh Ramanathan",
+    "title": "Managing Director and Chief Growth Officer",
+    "company": "Excelencia",
+    "companyBlurb": "Excelencia is a global IT solutions and software development company based in Ch",
+    "location": "Austin, Texas",
+    "connections": 0,
+    "roleMonths": 0,
+    "linkedin": "http://www.linkedin.com/in/rajeshpr",
+    "email": "rajesh.ramanathan@excelenciaconsulting.com",
+    "employeeCount": 470,
+    "signals": {
+      "newRole": null,
+      "network": {
+        "degree": 3,
+        "count": 0
+      },
+      "funding": null
+    }
+  }
+]
+;
 
 // Supabase config
 const SUPABASE_URL = 'https://rtduqguwhkczexnoawej.supabase.co';
