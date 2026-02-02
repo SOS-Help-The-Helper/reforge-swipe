@@ -1,0 +1,167 @@
+{
+  "lastUpdated": "2026-02-02T21:45:00Z",
+  "pendingDecisions": [
+    {
+      "id": "dec-001",
+      "type": "follow_up",
+      "priority": "urgent",
+      "company": "Canon Press",
+      "contact": "Ren Carolino",
+      "email": "ren@canonpress.com",
+      "context": "No-show today @ 4:15 PM. You sent reschedule email asking for better time.",
+      "question": "Continue pursuing or move on?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send 1 more follow-up in 48h", "action": "schedule_followup"},
+        {"id": "a2", "label": "Move to nurture sequence", "action": "nurture"},
+        {"id": "a3", "label": "Mark as unresponsive", "action": "close_lost"}
+      ],
+      "sources": ["email", "calendar"]
+    },
+    {
+      "id": "dec-002",
+      "type": "pricing_objection",
+      "priority": "high",
+      "company": "HaltH",
+      "contact": "Nick",
+      "email": "nick@halth.com",
+      "context": "Pricing objection: '$15k/annum doesn't make sense for us'. Had good demo call Jan 21.",
+      "question": "Offer discount/smaller package or accept loss?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Offer monthly pricing ($1.5K/mo)", "action": "send_pricing_email"},
+        {"id": "a2", "label": "Offer smaller package ($8K)", "action": "send_pricing_email"},
+        {"id": "a3", "label": "Accept loss, move on", "action": "close_lost"}
+      ],
+      "sources": ["email", "gong"],
+      "gongCallId": "8303743900425471693"
+    },
+    {
+      "id": "dec-003",
+      "type": "follow_up",
+      "priority": "high",
+      "company": "Lindsay",
+      "contact": "Lindsay",
+      "email": null,
+      "context": "Replied Jan 28: 'Not forgotten about plans with Reforge. Things moved slowly with holidays.'",
+      "question": "Book the meeting now?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send calendar link", "action": "send_calendar_link"},
+        {"id": "a2", "label": "Propose specific times", "action": "send_time_options"},
+        {"id": "a3", "label": "Wait for her to reach out", "action": "defer"}
+      ],
+      "sources": ["email"]
+    },
+    {
+      "id": "dec-004",
+      "type": "follow_up",
+      "priority": "high",
+      "company": "Demeter",
+      "contact": "Juhi",
+      "email": null,
+      "context": "Replied Jan 28: 'I'd like to go over your full suite of offerings. Trust 30 mins would be enough?'",
+      "question": "Book the demo?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send calendar link for 30-min demo", "action": "send_calendar_link"},
+        {"id": "a2", "label": "Confirm interest first", "action": "send_confirmation"}
+      ],
+      "sources": ["email"]
+    },
+    {
+      "id": "dec-005",
+      "type": "pipeline_stall",
+      "priority": "high",
+      "company": "EvenUp",
+      "contact": "Garrett Edel / Jagrat",
+      "email": null,
+      "context": "$50K pipeline - in pilot since Jan 21. Testing Gong connector. HIPAA concern flagged.",
+      "question": "Check in on pilot progress?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send pilot check-in email", "action": "send_checkin"},
+        {"id": "a2", "label": "Address HIPAA concern proactively", "action": "send_hipaa_info"},
+        {"id": "a3", "label": "Wait for them", "action": "defer"}
+      ],
+      "sources": ["pipeline", "gong"],
+      "gongCallId": "15060266253660706"
+    },
+    {
+      "id": "dec-006",
+      "type": "pipeline_stall",
+      "priority": "high",
+      "company": "Fox Local",
+      "contact": null,
+      "email": null,
+      "context": "$27K pipeline - budget approval was '2-4 weeks' as of mid-Jan. Should be decided by now.",
+      "question": "Follow up on budget decision?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send budget check-in", "action": "send_checkin"},
+        {"id": "a2", "label": "Offer pilot to reduce risk", "action": "send_pilot_offer"},
+        {"id": "a3", "label": "Wait another week", "action": "defer"}
+      ],
+      "sources": ["pipeline"]
+    },
+    {
+      "id": "dec-007",
+      "type": "re_engage",
+      "priority": "medium",
+      "company": "iRobot",
+      "contact": null,
+      "email": null,
+      "context": "$80K closed-lost. Lost to Enterpret in RFP. May be unhappy with Enterpret now.",
+      "question": "Reach out to check on Enterpret experience?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send 'checking in' email", "action": "send_checkin"},
+        {"id": "a2", "label": "LinkedIn message first", "action": "linkedin_outreach"},
+        {"id": "a3", "label": "Not worth pursuing", "action": "skip"}
+      ],
+      "sources": ["closed_lost"]
+    },
+    {
+      "id": "dec-008",
+      "type": "meeting_prep",
+      "priority": "urgent",
+      "company": "Yazio",
+      "contact": "Katie Hudson",
+      "email": null,
+      "context": "Pilot review meeting Feb 4 @ 10 AM EST. Had call Jan 21.",
+      "question": "Prep needed before meeting?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Review Gong call + prep deck", "action": "prep_meeting"},
+        {"id": "a2", "label": "Send pre-meeting email with agenda", "action": "send_agenda"},
+        {"id": "a3", "label": "No prep needed", "action": "skip"}
+      ],
+      "sources": ["calendar", "gong"],
+      "gongCallId": "2427138745515163271"
+    },
+    {
+      "id": "dec-009",
+      "type": "stale_outreach",
+      "priority": "medium",
+      "company": "Builder Chat Recipients",
+      "contact": "Multiple",
+      "email": null,
+      "context": "8 Builder chat emails sent Jan 25-28 with no reply: Ryna, Leslie, United, Akar, Justin, Ashutosh, JEREMY, Abel",
+      "question": "Send follow-up or move on?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send 1 follow-up each", "action": "batch_followup"},
+        {"id": "a2", "label": "Move all to nurture", "action": "batch_nurture"},
+        {"id": "a3", "label": "Let it go", "action": "skip"}
+      ],
+      "sources": ["email"]
+    },
+    {
+      "id": "dec-010",
+      "type": "new_opportunity",
+      "priority": "high",
+      "company": "Bit2Me",
+      "contact": "Annelise",
+      "email": null,
+      "context": "New intro today - 'Glad to hear data analysis evolved, excited to discuss partnership.'",
+      "question": "Prioritize booking this?",
+      "suggestedActions": [
+        {"id": "a1", "label": "Send calendar link ASAP", "action": "send_calendar_link"},
+        {"id": "a2", "label": "Research company first", "action": "research_then_reach"},
+        {"id": "a3", "label": "Let them book", "action": "defer"}
+      ],
+      "sources": ["email"]
+    }
+  ]
+}
